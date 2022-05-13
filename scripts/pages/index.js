@@ -3,7 +3,7 @@
         let photographers = [
         ]
 
-        await fetch('../../data/photographers.json').then(async (response) => {
+        await fetch('data/photographers.json').then(async (response) => {
             let data = await response.json()
             console.log(data.photographers)
             photographers = data.photographers    
