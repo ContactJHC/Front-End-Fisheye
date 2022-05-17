@@ -8,6 +8,10 @@
     margin: 0 100px;
 }
 
+.photograph-section img {
+    object-fit: cover;
+}
+
 .contact_button {
     display: ;
     font-size: 20px;
