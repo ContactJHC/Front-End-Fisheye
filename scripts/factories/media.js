@@ -41,13 +41,13 @@ function media (dataOneArtwork) {
         const entitled = document.createElement('h3')
         entitled.setAttribute('class', 'title')
         entitled.textContent = title
-        const likes = document.createElement('p')
-        likes.setAttribute('class', 'likes')
-        likes.textContent = `${likes} \u2665`
+        const nbLikes = document.createElement('p')
+        nbLikes.setAttribute('class', 'likes')
+        nbLikes.textContent = `${likes} \u2665`
         card.appendChild(artwork)
         card.appendChild(titleAndLikes)
         titleAndLikes.appendChild(entitled)
-        titleAndLikes.appendChild(likes)
+        titleAndLikes.appendChild(nbLikes)
         return card
     }
 
