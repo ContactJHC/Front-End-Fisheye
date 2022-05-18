@@ -4,28 +4,32 @@
 
 function media (dataOneArtwork) {
 
-    const { id, photographerId, title, artWork, likes, date, price } = dataOneArtwork
+    const { id, photographerId, title, image, video, likes, date, price } = dataOneArtwork
+    const srcImage = `assets/images/${photographerId}/${image}`
+    const srcVideo = `assets/images/${photographerId}/${video}`
     
-    const srcArtWork = `assets/images/${photographerId}/${artWork}`
+    console.log(dataOneArtwork)
+    console.log(srcImage)
+    console.log(srcVideo)
 
     function htmlArtwork() {
         // affichage de l'image ou de la vidéo
-        console.log(data.image)
+        console.log(dataOneArtwork.image)
         if (dataOneArtwork.image) {
             const image = document.createElement('img')
-            image.setAttribute('src', srcArtWork)
+            image.setAttribute('src', srcImage)
             image.setAttribute('alt', `Photographie intitulée ${title}`)
-            return img
+            return image
         } else {
             const videoPlayer = document.createElement('video')
-            video.setAttribute('id','video')
-            video.setAttribute('controls', '')
+            videoPlayer.setAttribute('id','video')
+            videoPlayer.setAttribute('controls', '')
             const source = document.createElement('source')
-            source.setAttribute('src', srcArtWork)
+            source.setAttribute('src', srcVideo)
             source.setAttribute('alt', `vidéo intitulée ${title}`)
             source.setAttribute('type', 'video/mp4')
-            video.appendChild(source)
-            return video
+            videoPlayer.appendChild(source)
+            return videoPlayer
         }
     }
     

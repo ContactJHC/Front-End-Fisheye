@@ -1,52 +1,52 @@
 //Mettre le code JavaScript lié à la page photographer.html
-function media (dataOneArtwork) {
+// function media (dataOneArtwork) {
 
-    const { id, photographerId, title, artWork, likes, date, price } = dataOneArtwork
+//     const { id, photographerId, title, image, likes, date, price } = dataOneArtwork
     
-    const srcArtWork = `assets/images/${photographerId}/${artWork}`
+//     const srcArtWork = `assets/images/${photographerId}/${image}`
 
-    function htmlArtwork() {
-        // affichage de l'image ou de la vidéo
-        console.log(dataOneArtwork.image)
-        if (dataOneArtwork.image) {
-            const image = document.createElement('img')
-            image.setAttribute('src', srcArtWork)
-            image.setAttribute('alt', `Photographie intitulée ${title}`)
-            return image
-        } else {
-            const videoPlayer = document.createElement('video')
-            videoPlayer.setAttribute('id','video')
-            videoPlayer.setAttribute('controls', '')
-            const source = document.createElement('source')
-            source.setAttribute('src', srcArtWork)
-            source.setAttribute('alt', `vidéo intitulée ${title}`)
-            source.setAttribute('type', 'video/mp4')
-            videoPlayer.appendChild(source)
-            return videoPlayer
-        }
-    }
+//     function htmlArtwork() {
+//         // affichage de l'image ou de la vidéo
+//         console.log(dataOneArtwork.image)
+//         if (dataOneArtwork.image) {
+//             const image = document.createElement('img')
+//             image.setAttribute('src', srcArtWork)
+//             image.setAttribute('alt', `Photographie intitulée ${title}`)
+//             return image
+//         } else {
+//             const videoPlayer = document.createElement('video')
+//             videoPlayer.setAttribute('id','video')
+//             videoPlayer.setAttribute('controls', '')
+//             const source = document.createElement('source')
+//             source.setAttribute('src', srcArtWork)
+//             source.setAttribute('alt', `vidéo intitulée ${title}`)
+//             source.setAttribute('type', 'video/mp4')
+//             videoPlayer.appendChild(source)
+//             return videoPlayer
+//         }
+//     }
     
-    function cardOneArtwork() {
-        const card = document.createElement('article')
-        const artwork = htmlArtwork()
-        const titleAndLikes = document.createElement('div')
-        titleAndLikes.setAttribute('class','titleAndLikes')
-        const entitled = document.createElement('h3')
-        entitled.setAttribute('class', 'title')
-        entitled.textContent = title
-        const likes = document.createElement('p')
-        likes.setAttribute('class', 'likes')
-        likes.textContent = `${likes} \u2665`
-        card.appendChild(artwork)
-        card.appendChild(titleAndLikes)
-        titleAndLikes.appendChild(entitled)
-        titleAndLikes.appendChild(likes)
-        return card
-    }
+//     function cardOneArtwork() {
+//         const card = document.createElement('article')
+//         const artwork = htmlArtwork()
+//         const titleAndLikes = document.createElement('div')
+//         titleAndLikes.setAttribute('class','titleAndLikes')
+//         const entitled = document.createElement('h3')
+//         entitled.setAttribute('class', 'title')
+//         entitled.textContent = title
+//         const likes = document.createElement('p')
+//         likes.setAttribute('class', 'likes')
+//         likes.textContent = `${likes} \u2665`
+//         card.appendChild(artwork)
+//         card.appendChild(titleAndLikes)
+//         titleAndLikes.appendChild(entitled)
+//         titleAndLikes.appendChild(likes)
+//         return card
+//     }
 
-    return cardOneArtwork()
+//     return cardOneArtwork
 
-}
+// }
 
 
 async function getData() {
@@ -68,10 +68,15 @@ function displayPhotos(dataAllMediaOneID) {
     // dataAllMediaOneID vaut data.media triée selon l'ID de l'artiste de la page affichée
     const sectionPhotographPhotos = document.querySelector(".photograph-photos")
     // On affiche en HTML toutes les photos et vidéos de l'artiste en parcourant dataAllMediaOneID
-    const mediaOneId = media(dataAllMediaOneID)
-    const oneArtworksDOM = mediaOneId.cardOneArtwork()
-    sectionPhotographPhotos.appendChild(oneArtworksDOM)
+    dataAllMediaOneID.forEach((e) => {
+        const mediaOneId = media(e)
+        console.log(e)
+        const oneArtworksDOM = mediaOneId()
+        console.log(oneArtworksDOM)
+        sectionPhotographPhotos.appendChild(oneArtworksDOM)
     // l'affichage HTML d'une Card de photo/vidéo se fait par l'appel de la méthode cardOneArtwork
+    })
+    
         
     
 }
@@ -85,6 +90,7 @@ async function init() {
     const allData = await getData();
     const allMediaOnePhotographer = 
         allData.media.filter(e => e.photographerId == idOnePhotographer)
+        console.log(allMediaOnePhotographer)
     displayPhotos(allMediaOnePhotographer)
 };
 
