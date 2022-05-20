@@ -88,10 +88,45 @@ console.log(idOnePhotographer)
 async function init() {
     // Récupère les datas des photographes
     const allData = await getData();
+    //  Récupère les photos de photographe dont la page est affichée
     const allMediaOnePhotographer = 
         allData.media.filter(e => e.photographerId == idOnePhotographer)
-        console.log(allMediaOnePhotographer)
+    // Affiche les photos
     displayPhotos(allMediaOnePhotographer)
+    // Affiche la bannière fixe avec les prix
+    const fixedBanner = document.createElement('div')
+    fixedBanner.setAttribute('class','likesAndPriceBanner')
+    const photographerData = allData.photographers.filter(e=>e.id==idOnePhotographer)[0]
+    const photographerPrice = photographerData.price
+    fixedBanner.textContent = `${photographerPrice}€/jour`
+    document.querySelector('#main').appendChild(fixedBanner)
+    // Affiche l'entête 
+    const photographHeader = document.querySelector('.photograph-header')
+    console.log(photographHeader)
+    const photographerNameAndCity = document.createElement('div')
+    photographerNameAndCity.setAttribute('class','photographerNameAndCity')
+    const photographerName = document.createElement('h1')
+    photographerName.setAttribute('class','photographerName')
+    photographerName.textContent = `${photographerData.name}`
+    const photographerCity = document.createElement('p')
+    photographerCity.setAttribute('class', 'photographerCity')    
+    photographerCity.textContent = `${photographerData.city}, ${photographerData.country.toUpperCase()}`
+    const photographerQuote = document.createElement('p')
+    photographerQuote.setAttribute('class','quoting')
+    photographerQuote.textContent = `${photographerData.tagline}`
+    const photographerPictureDiv = document.createElement('div')
+    photographerPictureDiv.setAttribute('id','photographerPicture')
+    const photographerPicture = document.createElement('img')
+    photographerPicture.setAttribute('class','photographerPicture')
+    photographerPicture.setAttribute('src',`assets/photographers/${photographerData.portrait}`)
+    photographerPicture.setAttribute('alt',`${photographerData.name}`)
+    photographHeader.appendChild(photographerNameAndCity)
+    photographerNameAndCity.appendChild(photographerName)
+    photographerNameAndCity.appendChild(photographerCity)
+    photographerNameAndCity.appendChild(photographerQuote)
+    photographHeader.appendChild(photographerPictureDiv)
+    photographerPictureDiv.appendChild(photographerPicture)
+
 };
 
 init();
