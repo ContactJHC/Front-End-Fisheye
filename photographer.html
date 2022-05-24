@@ -22,17 +22,65 @@
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img id="modalCloseBtn" src="assets/icons/close.svg" onclick="closeModal()" />
         </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
+				<form class="formulaire" onsubmit="validate">
+					<div class="formData">
+						<label for="first">Prénom</label>
+						<input
+              class="text-control"
+              type="text"
+              id="first"
+              name="first"
+              minlength="2"
+            />
+            <span class="aidesFirst">Au moins 2 caractères et seulement des lettres.</span>
 					</div>
-          <button class="contact_button">Envoyer</button>
+          <div class="formData">
+						<label for="last">Nom</label>
+						<input
+              class="text-control"
+              type="text"
+              id="last"
+              name="last"
+              minlength="2"
+            />
+            <span class="aidesLast">Au moins 2 caractères et seulement des lettres.</span>
+					</div>
+          <div class="formData">
+						<label for="email">Email</label>
+						<input
+              class="text-control"
+              type="text"
+              id="email"
+              name="email"
+            />
+            <span class="aidesEmail">Saisir une adresse email valide.</span>
+					</div>
+          <div class="formData">
+						<label for="messenger">Votre message</label>
+						<input
+              class="text-control"
+              type="text"
+              id="messenger"
+              name="messenger"
+            />
+            <span class="aidesMessenger">Saisir un message - 500 caractères maximum </span>
+					</div>
+          <button type="submit" class="contact_button">
+            Envoyer          
+          </button>
 				</form>
 			</div>
 		</div>
+    <div id="lightBox_modal" aria-hidden="false">
+      <div class="lightBox">
+        
+      </div>
+      <!-- titre de la photo ou vidéo mise en avant en h5 à renseigner via JS -->
+      <h5></h5>
+
+    </div>
     <script src="/scripts/factories/media.js"></script>
     <script src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
