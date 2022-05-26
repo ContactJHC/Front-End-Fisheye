@@ -31,13 +31,13 @@ function closeModal() {
 
 // fermeture de la modale en appyant sur 'Echap' 
 
-$(document).on('keydown', e => {
-  const keyCode = e.keyCode ? e.keyCode : e.which
+// $(document).on('keydown', e => {
+//   const keyCode = e.keyCode ? e.keyCode : e.which
 
-  if (modal.attr('aria-hidden') == 'false' && keyCode === 27) {
-    closeModal()
-  }
-})
+//   if (modal.attr('aria-hidden') == 'false' && keyCode === 27) {
+//     closeModal()
+//   }
+// })
 
 // // // Vérification de la validité du prénom renseigné 
 
@@ -125,13 +125,14 @@ const outputData = {
 }
 
 function validate() {
-    let resultat = verifEmail() && verifMessage() && verifPrenom() && verifNom()
-    if (resultat) {
-        closeModal()
-        console.log(outputData)
-    } else {
-        return false
-    }
+    // alert('alerte')
+    // let resultat = verifEmail() && verifMessage() && verifPrenom() && verifNom()
+    // if (resultat) {
+    //     closeModal()
+    //     console.log(outputData)
+    // } else {
+    //     return false
+    // }
     return false
 }
 

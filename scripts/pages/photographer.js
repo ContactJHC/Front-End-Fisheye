@@ -27,6 +27,7 @@ function displayPhotos(dataAllMediaOneID) {
         console.log(oneArtworksDOM)
         sectionPhotographPhotos.appendChild(oneArtworksDOM)
     // l'affichage HTML d'une Card de photo/vidéo se fait par l'appel de la méthode cardOneArtwork
+
     })
     
         
@@ -38,13 +39,21 @@ const idOnePhotographer = params.get('id')
 console.log(idOnePhotographer)
 
 async function init() {
-    // Récupère les datas des photographes
+    // Récupère les datas des photographes, photographer et media
     const allData = await getData();
-    //  Récupère les photos de photographe dont la page est affichée
+    //  Récupère les photos du photographe dont la page est affichée
     const allMediaOnePhotographer = 
         allData.media.filter(e => e.photographerId == idOnePhotographer)
+    const bout = document.querySelector('.toutsimpl')
+    bout.addEventListener('click',()=>{
+        console.log(allMediaOnePhotographer)
+    })
     // Affiche les photos
     displayPhotos(allMediaOnePhotographer)
+    // Créer la lightbox
+    allMediaOnePhotographer.forEach((element,index) => {
+
+    })
     // Affiche la bannière fixe avec les prix
     const fixedBanner = document.createElement('div')
     fixedBanner.setAttribute('class','likesAndPriceBanner')

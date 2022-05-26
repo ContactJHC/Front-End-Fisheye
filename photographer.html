@@ -23,8 +23,8 @@
 				<header>
           <h2>Contactez-moi</h2>
           <img id="modalCloseBtn" src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-				<form class="formulaire" onsubmit="validate">
+        </header>d
+				<form id="formulaire" onsubmit= "return validate();">
 					<div class="formData">
 						<label for="first">Prénom</label>
 						<input
@@ -67,16 +67,21 @@
             />
             <span class="aidesMessenger">Saisir un message - 500 caractères maximum </span>
 					</div>
-          <button type="submit" class="contact_button">
+          <button class="contact_button">
             Envoyer          
           </button>
 				</form>
 			</div>
 		</div>
-    <div id="lightBox_modal" aria-hidden="false">
-      <div class="lightBox">
-        
-      </div>
+    <button class="toutsimpl">texte</button>
+    <div id="lightbox" aria-hidden="false">      
+      <button class="lightbox__close">Précedent</button>
+      <button class="lightbox__next">Suivant</button>
+      <button class="lightbox__prev">Précédent</button>
+      <div class="lightbox__container">
+        <img src="assets/images/930/Architecture_Water_on_Modern.jpg" alt="">
+        <div class="lightbox__title">Titre d'illustration</div>
+      </div>    
       <!-- titre de la photo ou vidéo mise en avant en h5 à renseigner via JS -->
       <h5></h5>
 

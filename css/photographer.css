@@ -2,6 +2,92 @@
     overflow: hidden;
  }
 
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(250, 250, 250, 0.9);
+    z-index: 9;
+}
+
+.lightbox__next,
+.lightbox__prev {
+    border: none;
+    background: url(../assets/icons/right.svg) center center / 3rem 3rem no-repeat;
+    width: 5rem;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.lightbox__prev {
+    right: auto;
+    left: 0;
+    transform: rotate(180deg);
+}
+
+.lightbox__close {
+    height: 5rem;
+    width: 5rem;
+    border: none;
+    background: url(../assets/icons/closeLightbox.svg) center center / 2.5rem 2.5rem no-repeat;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 12;
+
+}
+
+#lightbox button {
+    opacity: 1;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    /* cacher le texte des boutons */
+    text-indent: -3000px;
+
+}
+
+#lightbox button:hover, #lightbox button:active {
+    opacity: 0.5;
+}
+
+/* ***
+changement de stratégie sur title : le passer en enfant de lightbow__container pour assurer sa 
+visibilité V hauteur image VS l'avoir en child de lightbox  */
+/* .lightbox__title {
+    width: 100vw;
+    height: 10vh;
+    position: fixed;
+    bottom: 0;
+    border: none;
+    z-index: 11;
+    padding-left: 5rem;
+} */
+
+ .lightbox__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 5rem;
+    width: calc(100% - 10rem);
+    min-height: 100vh;
+    z-index: 10;
+ }
+
+div.lightbox__container > img {
+    max-height: 90vh;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+
 header .logo {
     margin: 0;
     margin-left: 5%;
