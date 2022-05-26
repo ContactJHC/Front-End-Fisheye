@@ -22,9 +22,7 @@ function displayPhotos(dataAllMediaOneID) {
     // On affiche en HTML toutes les photos et vidéos de l'artiste en parcourant dataAllMediaOneID
     dataAllMediaOneID.forEach((e) => {
         const mediaOneId = media(e)
-        console.log(e)
-        const oneArtworksDOM = mediaOneId()
-        console.log(oneArtworksDOM)
+        const oneArtworksDOM = mediaOneId()        
         sectionPhotographPhotos.appendChild(oneArtworksDOM)
     // l'affichage HTML d'une Card de photo/vidéo se fait par l'appel de la méthode cardOneArtwork
 
@@ -36,7 +34,7 @@ function displayPhotos(dataAllMediaOneID) {
 
 const params = (new URL(document.location)).searchParams
 const idOnePhotographer = params.get('id')
-console.log(idOnePhotographer)
+
 
 async function init() {
     // Récupère les datas des photographes, photographer et media
@@ -44,16 +42,54 @@ async function init() {
     //  Récupère les photos du photographe dont la page est affichée
     const allMediaOnePhotographer = 
         allData.media.filter(e => e.photographerId == idOnePhotographer)
-    const bout = document.querySelector('.toutsimpl')
-    bout.addEventListener('click',()=>{
-        console.log(allMediaOnePhotographer)
-    })
+
+    // exemple comme quoi un addeventlistener dans init() permet d'être 
+    // actif en dehors du scope de la fonction 
+    // const bout = document.querySelector('.toutsimpl')
+    
+    // bout.addEventListener('click',()=>{
+    //     console.log(allMediaOnePhotographer)
+    // })
     // Affiche les photos
     displayPhotos(allMediaOnePhotographer)
-    // Créer la lightbox
-    allMediaOnePhotographer.forEach((element,index) => {
+    // Créer la lightbox - récupérer src, implémenter un indice, récupérer le titre
+    let arrayRefSrc = []
+    let arrayIndex = []
+    let arrayTitle = []
+    let refSrc = ''
+    let index = 0
+    let title = ''
+    // alt vaut title, pas besoin de le déclarer 
+    allMediaOnePhotographer.forEach((dataOneArtwork) => {
+        const { id, photographerId, title, image, video, likes, date, price } = dataOneArtwork
+        // affichage de l'image ou de la vidéo        
+        if (dataOneArtwork.image) {
+            refSrc = `assets/images/${photographerId}/${image}`
+            arrayRefSrc.push(refSrc)
+            arrayIndex.push(index)
+            arrayTitle.push(title)
+            index ++
+        } else {
+            refSrc = `assets/images/${photographerId}/${video}`
+            arrayRefSrc.push(refSrc)
+            arrayIndex.push(index)
+            arrayTitle.push(title)
+            index ++
+
+        }
+        
 
     })
+    
+console.log(arrayRefSrc, arrayIndex, arrayTitle);
+
+    // allMediaOnePhotographer.forEach((element,index) => {
+    //     const { id, photographerId, title, image, video, likes, date, price } = dataOneArtwork
+    //     const srcImage = `assets/images/${photographerId}/${image}`
+    //     const srcVideo = `assets/images/${photographerId}/${video}`
+    //     arrayIndexSrcTitle.push(allMediaOnePhotographer)
+
+    // })
     // Affiche la bannière fixe avec les prix
     const fixedBanner = document.createElement('div')
     fixedBanner.setAttribute('class','likesAndPriceBanner')
@@ -62,8 +98,7 @@ async function init() {
     fixedBanner.textContent = `${photographerPrice}€/jour`
     document.querySelector('#main').appendChild(fixedBanner)
     // Affiche l'entête 
-    const photographHeader = document.querySelector('.photograph-header')
-    console.log(photographHeader)
+    const photographHeader = document.querySelector('.photograph-header')    
     const photographerNameAndCity = document.createElement('div')
     photographerNameAndCity.setAttribute('class','photographerNameAndCity')
     const photographerName = document.createElement('h1')
@@ -87,6 +122,7 @@ async function init() {
     photographerNameAndCity.appendChild(photographerQuote)
     photographHeader.appendChild(photographerPictureDiv)
     photographerPictureDiv.appendChild(photographerPicture)
+    // 
 
 };
 

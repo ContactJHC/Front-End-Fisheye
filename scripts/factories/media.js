@@ -7,14 +7,9 @@ function media (dataOneArtwork) {
     const { id, photographerId, title, image, video, likes, date, price } = dataOneArtwork
     const srcImage = `assets/images/${photographerId}/${image}`
     const srcVideo = `assets/images/${photographerId}/${video}`
-    
-    console.log(dataOneArtwork)
-    console.log(srcImage)
-    console.log(srcVideo)
 
     function htmlArtwork() {
-        // affichage de l'image ou de la vidéo
-        console.log(dataOneArtwork.image)
+        // affichage de l'image ou de la vidéo        
         if (dataOneArtwork.image) {
             const image = document.createElement('img')
             image.setAttribute('src', srcImage)

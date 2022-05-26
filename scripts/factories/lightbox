@@ -1,0 +1,10 @@
+function lightbox (dataOneArtwork) {
+
+    const { id, photographerId, title, image, video, likes, date, price } = dataOneArtwork
+    const srcImage = `assets/images/${photographerId}/${image}`
+    const srcVideo = `assets/images/${photographerId}/${video}`
+    console.log("🚀 ~ file: lightbox ~ line 6 ~ lightbox ~ srcVideo", srcVideo)
+
+}
+
+console.log('test :>> ', test);
