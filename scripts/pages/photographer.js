@@ -145,6 +145,12 @@ async function init() {
 
 init();
 
+// fermeture de la lightbox au clic sur la croix
+const croixDeFermeture = document.querySelector(".lightbox__close")
+croixDeFermeture.addEventListener('click', () => {
+    document.querySelector('#lightbox').style.display = 'none'
+})
+
 // async function displayData(photos) {
 //     const photosSection = document.querySelector(".photograph-photos");
 
