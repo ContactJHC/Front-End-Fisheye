@@ -2,7 +2,12 @@
     overflow: hidden;
  }
 
-.lightbox {
+ div.photograph-photos article {
+    cursor: pointer;
+ }
+
+#lightbox {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;

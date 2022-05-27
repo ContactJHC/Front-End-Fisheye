@@ -62,7 +62,7 @@ async function init() {
     // alt vaut title, pas besoin de le déclarer 
     allMediaOnePhotographer.forEach((dataOneArtwork) => {
         const { id, photographerId, title, image, video, likes, date, price } = dataOneArtwork
-        // affichage de l'image ou de la vidéo        
+        // distinction entre image et vidéo        
         if (dataOneArtwork.image) {
             refSrc = `assets/images/${photographerId}/${image}`
             arrayRefSrc.push(refSrc)
@@ -75,13 +75,26 @@ async function init() {
             arrayIndex.push(index)
             arrayTitle.push(title)
             index ++
-
         }
-        
-
     })
+
     
-console.log(arrayRefSrc, arrayIndex, arrayTitle);
+
+    // affichage d'une image cliquée dans la lightbox
+    const photosAffichees = document.querySelectorAll(" div.photograph-photos article img")
+    photosAffichees.forEach( 
+        (uneSeulePhoto,indexUneSeulePhoto) => {
+            uneSeulePhoto.addEventListener("click", () => {
+                const sourcePhoto = uneSeulePhoto.getAttribute('src')
+                const indexPhoto = indexUneSeulePhoto
+                console.log(sourcePhoto,indexPhoto);
+                
+            })
+        }
+    )
+    // document.querySelector("div.photograph-photos article img").addEventListener(
+    //     "onclick", (e) => 
+    // )
 
     // allMediaOnePhotographer.forEach((element,index) => {
     //     const { id, photographerId, title, image, video, likes, date, price } = dataOneArtwork
