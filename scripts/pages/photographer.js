@@ -85,6 +85,7 @@ async function init() {
     photosAffichees.forEach( 
         (uneSeulePhoto,indexUneSeulePhoto) => {
             uneSeulePhoto.addEventListener("click", () => {
+                // affichage photo
                 const sourcePhoto = uneSeulePhoto.getAttribute('src')
                 const indexPhoto = indexUneSeulePhoto
                 const LAlightbox = document.querySelector('#lightbox')
@@ -92,7 +93,9 @@ async function init() {
                 const lightboxContainerImg = document.querySelector('div.lightbox__container img')
                 lightboxContainerImg.setAttribute('src', sourcePhoto)
                 lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
-                
+                // affichage du titre
+                const titreDeLaPhoto = document.querySelector('div.lightbox__title')
+                titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
             })
         }
     )
