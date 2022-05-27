@@ -87,7 +87,11 @@ async function init() {
             uneSeulePhoto.addEventListener("click", () => {
                 const sourcePhoto = uneSeulePhoto.getAttribute('src')
                 const indexPhoto = indexUneSeulePhoto
-                console.log(sourcePhoto,indexPhoto);
+                const LAlightbox = document.querySelector('#lightbox')
+                LAlightbox.style.display = 'block'
+                const lightboxContainerImg = document.querySelector('div.lightbox__container img')
+                lightboxContainerImg.setAttribute('src', sourcePhoto)
+                lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
                 
             })
         }

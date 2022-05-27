@@ -1,10 +1,8 @@
-function lightbox (dataOneArtwork) {
-
-    const { id, photographerId, title, image, video, likes, date, price } = dataOneArtwork
-    const srcImage = `assets/images/${photographerId}/${image}`
-    const srcVideo = `assets/images/${photographerId}/${video}`
-    console.log("🚀 ~ file: lightbox ~ line 6 ~ lightbox ~ srcVideo", srcVideo)
+function lightbox (sourcePhoto, indexPhoto, arrayRefSrc, arrayIndex, arrayTitle) {
+    const LAlightbox = document.querySelector('#lightbox')
+    LAlightbox.style.display = block
+    const lightboxContainerImg = document.querySelector('div.lightbox__container img')
+    lightboxContainerImg.setAttribute('src', sourcePhoto)
+    lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
 
 }
-
-console.log('test :>> ', test);
