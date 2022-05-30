@@ -16,15 +16,22 @@ function media (dataOneArtwork) {
             image.setAttribute('alt', `Photographie intitulée ${title}`)
             return image
         } else {
+            const encartVideo = document.createElement('div')
+            encartVideo.setAttribute('class','divArticleVideo')
             const videoPlayer = document.createElement('video')
             videoPlayer.setAttribute('id','video')
-            videoPlayer.setAttribute('controls', '')
+            // videoPlayer.setAttribute('controls', '')
+            const iconePlayVideo = document.createElement('img')
+            iconePlayVideo.setAttribute('class', 'iconeLectureVideo')
+            iconePlayVideo.setAttribute('src', './assets/icons/player.svg')
             const source = document.createElement('source')
             source.setAttribute('src', srcVideo)
-            source.setAttribute('alt', `vidéo intitulée ${title}`)
-            source.setAttribute('type', 'video/mp4')
+            // source.setAttribute('alt', `vidéo intitulée ${title}`)
+            // source.setAttribute('type', 'video/mp4')
+            encartVideo.appendChild(iconePlayVideo)
+            encartVideo.appendChild(videoPlayer)
             videoPlayer.appendChild(source)
-            return videoPlayer
+            return encartVideo
         }
     }
     
