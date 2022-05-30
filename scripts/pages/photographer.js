@@ -86,16 +86,34 @@ async function init() {
         (uneSeulePhoto,indexUneSeulePhoto) => {
             uneSeulePhoto.addEventListener("click", () => {
                 // affichage photo
-                const sourcePhoto = uneSeulePhoto.getAttribute('src')
-                const indexPhoto = indexUneSeulePhoto
+                let sourcePhoto = uneSeulePhoto.getAttribute('src')
+                let indexPhoto = indexUneSeulePhoto
                 const LAlightbox = document.querySelector('#lightbox')
                 LAlightbox.style.display = 'block'
                 const lightboxContainerImg = document.querySelector('div.lightbox__container img')
                 lightboxContainerImg.setAttribute('src', sourcePhoto)
                 lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
                 // affichage du titre
-                const titreDeLaPhoto = document.querySelector('div.lightbox__title')
+                let titreDeLaPhoto = document.querySelector('div.lightbox__title')
                 titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                // navigations photos de gauche au clic sur la flèche 'précédent'
+                const flechePrecedent = document.querySelector('.lightbox__prev')        
+                const nombrePhotos = photosAffichees.length
+                flechePrecedent.addEventListener("click", () => {
+                    if (arrayIndex[indexPhoto] == 0) {
+                        indexPhoto = nombrePhotos - 1
+                        sourcePhoto = arrayRefSrc[indexPhoto]
+                        lightboxContainerImg.setAttribute('src', sourcePhoto)
+                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                        titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                    } else { 
+                        indexPhoto = indexPhoto - 1 
+                        sourcePhoto = arrayRefSrc[indexPhoto]
+                        lightboxContainerImg.setAttribute('src', sourcePhoto)
+                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                        titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                    }})
+                
             })
         }
     )
