@@ -2,9 +2,36 @@
     overflow: hidden;
  }
 
+/* 
+document.querySelector("#main > div.photograph-photos > article:nth-child(1) > img")
+#main > div.photograph-photos > article:nth-child(9) > div.divArticleVideo
+*/
+
  div.photograph-photos article {
     cursor: pointer;
  }
+
+.divArticleVideo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#video {
+    opacity: 0.5;
+}
+ 
+/* .iconeLectureVideo : ci-dessous son sélecteur plus spécifique */
+
+#main > div.photograph-photos > article:nth-child(9) > div.divArticleVideo > img {
+    position: absolute;
+    object-fit: contain;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 50%;
+    
+}
 
 #lightbox {
     display: none;
