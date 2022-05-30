@@ -100,7 +100,7 @@ async function init() {
                 const flechePrecedent = document.querySelector('.lightbox__prev')        
                 const nombrePhotos = photosAffichees.length
                 flechePrecedent.addEventListener("click", () => {
-                    if (arrayIndex[indexPhoto] == 0) {
+                    if (indexPhoto == 0) {
                         indexPhoto = nombrePhotos - 1
                         sourcePhoto = arrayRefSrc[indexPhoto]
                         lightboxContainerImg.setAttribute('src', sourcePhoto)
@@ -113,7 +113,22 @@ async function init() {
                         lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
                         titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                     }})
-                
+                // navigations photos de droite au clic sur la flèche 'suivant'
+                const flecheSuivant = document.querySelector('.lightbox__next')
+                flecheSuivant.addEventListener('click', () => {
+                    if (indexPhoto == nombrePhotos - 1) {
+                        indexPhoto = 0
+                        sourcePhoto = arrayRefSrc[indexPhoto]
+                        lightboxContainerImg.setAttribute('src', sourcePhoto)
+                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                        titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                    } else {
+                        indexPhoto = indexPhoto + 1
+                        sourcePhoto = arrayRefSrc[indexPhoto]
+                        lightboxContainerImg.setAttribute('src', sourcePhoto)
+                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                        titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                    }})
             })
         }
     )
