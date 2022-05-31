@@ -87,12 +87,14 @@ async function init() {
     
     photosAffichees.forEach( 
         (uneSeulePhoto,indexUneSeulePhoto) => {
-            console.log(uneSeulePhoto.currentSrc);
-
             uneSeulePhoto.addEventListener("click", () => {
-                // affichage photo
-                
-                let indexPhoto = indexUneSeulePhoto
+
+    // affichage du titre pour image et pour vidéo 
+            let titreDeLaPhoto = document.querySelector('div.lightbox__title')
+            let indexPhoto = indexUneSeulePhoto
+            titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+
+        // affichage photo et vidéo                
                 const LAlightbox = document.querySelector('#lightbox')
                 LAlightbox.style.display = 'block'
                 const lightboxContainer = document.querySelector('.lightbox__container')
@@ -103,7 +105,7 @@ async function init() {
                     let sourceVideo = arrayRefSrc[indexPhoto]
                     lightboxContainerImg.style.display = 'none'
                     // lightboxContainerVideo.style.display = 'block'
-            // Création de l'élément complet de lecture vidéo 
+            // Création de l'élément complet de lecture vidéo - en cas de premier clic sur vidéo
                     const lightboxContainerVideo = document.createElement('video')
                     lightboxContainerVideo.setAttribute('class', 'htmlVideo')
                     lightboxContainerVideo.setAttribute('controls', '')
@@ -111,7 +113,8 @@ async function init() {
                     lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                     lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
                     lightboxContainerVideoSource.setAttribute('alt', arrayTitle[indexPhoto])
-                    lightboxContainer.appendChild(lightboxContainerVideo)
+                    lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
+                    // lightboxContainer.appendChild(lightboxContainerVideo)
                     lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
             // fermeture de la lightbox au clic pour empêcher l'empilement de vidéos consécutives
                     croixDeFermeture.addEventListener('click', () => {
@@ -120,38 +123,48 @@ async function init() {
                     })
                                 
                 } else {
+
+            // changement attributs de l'élément img HTML - en cas de premier clic sur image
                     lightboxContainerImg.style.display = 'block'
                     let sourcePhoto = uneSeulePhoto.getAttribute('src')
                     console.log(sourcePhoto);                    
                     lightboxContainerImg.setAttribute('src', sourcePhoto)
                     lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
-                }
-            
-                // affichage du titre
-                let titreDeLaPhoto = document.querySelector('div.lightbox__title')
-                titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
-                // navigations photos de gauche au clic sur la flèche 'précédent'
+                }            
+
+        // navigations photos de gauche au clic sur la flèche 'précédent'
                 const flechePrecedent = document.querySelector('.lightbox__prev')        
                 const nombrePhotos = photosAffichees.length
                 flechePrecedent.addEventListener("click", () => {
                     if (indexPhoto == 0) {
-                        // cas : passer d'une vidéo à une image 
-                        if (uneSeulePhoto.classList.contains('videoAffichee')) {
-                        lightboxContainerVideo.style.display = 'none'
-                        lightboxContainerImg.style.display = 'block'                        
-                        }
-
+                // cas : passer d'une vidéo à une image 
+                        // if (uneSeulePhoto.classList.contains('videoAffichee')) {
+                        // lightboxContainerVideo.style.display = 'none'
+                        // lightboxContainerImg.style.display = 'block'                        
+                        // }
                         indexPhoto = nombrePhotos - 1
-                        // cas : passer d'une image à une vidéo précédente en début de liste
+                // cas : passer d'une image à une vidéo précédente en début de liste
                         if (photosAffichees[indexPhoto].classList.contains('videoAffichee')) {
-                            sourceVideo = arrayRefSrc[indexPhoto]
                             lightboxContainerImg.style.display = 'none'
                             lightboxContainerVideo.style.display = 'block'
-                            lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                            sourceVideo = arrayRefSrc[indexPhoto]
+                            const lightboxContainerVideo = document.createElement('video')
+                            lightboxContainerVideo.setAttribute('class', 'htmlVideo')
+                            lightboxContainerVideo.setAttribute('controls', '')
+                            const lightboxContainerVideoSource = document.createElement('source')
                             lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                             lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
-                            titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
-                        // cas : passer d'une image à une image précente en début de liste
+                            lightboxContainerVideoSource.setAttribute('alt', arrayTitle[indexPhoto])
+                            lightboxContainer.appendChild(lightboxContainerVideo)
+                            lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
+                            // 
+                            // lightboxContainerImg.style.display = 'none'
+                            // lightboxContainerVideo.style.display = 'block'
+                            // lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                            // lightboxContainerVideoSource.setAttribute('src', sourceVideo)
+                            // lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
+                            // titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+            // cas : passer d'une image à une image précente en début de liste
                         } else {
                             sourcePhoto = arrayRefSrc[indexPhoto]
                             lightboxContainerImg.style.display = 'block'
