@@ -95,28 +95,38 @@ async function init() {
                 let indexPhoto = indexUneSeulePhoto
                 const LAlightbox = document.querySelector('#lightbox')
                 LAlightbox.style.display = 'block'
+                const lightboxContainer = document.querySelector('.lightbox__container')
                 const lightboxContainerImg = document.querySelector('div.lightbox__container img')
-                const lightboxContainerVideo = document.querySelector('div.lightbox__container video')
-                const lightboxContainerVideoSource = document.querySelector('div.lightbox__container video source')
-                console.log(lightboxContainerVideoSource)
+                const croixDeFermeture = document.querySelector(".lightbox__close")
+            
                 if (uneSeulePhoto.classList.contains('videoAffichee')) {
                     let sourceVideo = arrayRefSrc[indexPhoto]
-                    console.log(sourceVideo);
                     lightboxContainerImg.style.display = 'none'
-                    lightboxContainerVideo.style.display = 'block'
-                    lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                    // lightboxContainerVideo.style.display = 'block'
+            // Création de l'élément complet de lecture vidéo 
+                    const lightboxContainerVideo = document.createElement('video')
+                    lightboxContainerVideo.setAttribute('class', 'htmlVideo')
+                    lightboxContainerVideo.setAttribute('controls', '')
+                    const lightboxContainerVideoSource = document.createElement('source')
                     lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                     lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
-                    console.log(lightboxContainerVideoSource)
+                    lightboxContainerVideoSource.setAttribute('alt', arrayTitle[indexPhoto])
+                    lightboxContainer.appendChild(lightboxContainerVideo)
+                    lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
+            // fermeture de la lightbox au clic pour empêcher l'empilement de vidéos consécutives
+                    croixDeFermeture.addEventListener('click', () => {
+                        LAlightbox.style.display = 'none'
+                        lightboxContainerVideo.style.display = 'none'
+                    })
                                 
                 } else {
-                    let sourcePhoto = uneSeulePhoto.getAttribute('src')
-                    console.log(sourcePhoto);
-                    lightboxContainerVideo.style.display = 'none'
                     lightboxContainerImg.style.display = 'block'
+                    let sourcePhoto = uneSeulePhoto.getAttribute('src')
+                    console.log(sourcePhoto);                    
                     lightboxContainerImg.setAttribute('src', sourcePhoto)
                     lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
                 }
+            
                 // affichage du titre
                 let titreDeLaPhoto = document.querySelector('div.lightbox__title')
                 titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
@@ -285,11 +295,12 @@ async function init() {
 
 init();
 
-// fermeture de la lightbox au clic sur la croix
+// fermeture de la lightbox au clic sur la croix et réinitialisation image et vidéo
+
 const croixDeFermeture = document.querySelector(".lightbox__close")
 croixDeFermeture.addEventListener('click', () => {
     document.querySelector('#lightbox').style.display = 'none'
-})
+    })
 
 // async function displayData(photos) {
 //     const photosSection = document.querySelector(".photograph-photos");
