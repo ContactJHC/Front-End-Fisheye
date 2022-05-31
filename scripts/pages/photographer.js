@@ -84,10 +84,14 @@ async function init() {
     // affichage d'une image cliquée dans la lightbox
     const photosAffichees = document.querySelectorAll(".photoAffichee, .videoAffichee")
     console.log(photosAffichees)
+    
     photosAffichees.forEach( 
         (uneSeulePhoto,indexUneSeulePhoto) => {
+            console.log(uneSeulePhoto.currentSrc);
+
             uneSeulePhoto.addEventListener("click", () => {
                 // affichage photo
+                
                 let indexPhoto = indexUneSeulePhoto
                 const LAlightbox = document.querySelector('#lightbox')
                 LAlightbox.style.display = 'block'
@@ -140,6 +144,8 @@ async function init() {
                         // cas : passer d'une image à une image précente en début de liste
                         } else {
                             sourcePhoto = arrayRefSrc[indexPhoto]
+                            lightboxContainerImg.style.display = 'block'
+                            lightboxContainerVideo.style.display = 'none'
                             lightboxContainerImg.setAttribute('src', sourcePhoto)
                             lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
                             titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
@@ -164,6 +170,8 @@ async function init() {
                         //cas : passer d'une image à une image précédente qqs indice non nul
                         } else {
                             sourcePhoto = arrayRefSrc[indexPhoto]
+                            lightboxContainerImg.style.display = 'block'
+                            lightboxContainerVideo.style.display = 'none'
                             lightboxContainerImg.setAttribute('src', sourcePhoto)
                             lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
                             titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
@@ -191,6 +199,8 @@ async function init() {
                         } else {
                             // cas : passer d'une image à une image suivante en fin de liste
                             sourcePhoto = arrayRefSrc[indexPhoto]
+                            lightboxContainerImg.style.display = 'block'
+                            lightboxContainerVideo.style.display = 'none'
                             lightboxContainerImg.setAttribute('src', sourcePhoto)
                             lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
                             titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
@@ -214,6 +224,8 @@ async function init() {
                         //cas : passer d'une image à une image suivante quel que soit indice non final de la liste 
                         } else {
                             sourcePhoto = arrayRefSrc[indexPhoto]
+                            lightboxContainerImg.style.display = 'block'
+                            lightboxContainerVideo.style.display = 'none'
                             lightboxContainerImg.setAttribute('src', sourcePhoto)
                             lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
                             titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
