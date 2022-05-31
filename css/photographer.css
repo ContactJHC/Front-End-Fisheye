@@ -31,9 +31,7 @@ document.querySelector("#main > div.photograph-photos > article:nth-child(1) > i
     opacity: 0.5;
 }
  
-/* .iconeLectureVideo : ci-dessous son sélecteur plus spécifique */
-
-#main > div.photograph-photos > article:nth-child(9) > div.divArticleVideo > img {
+div.divArticleVideo img.iconeLectureVideo {
     position: absolute;
     object-fit: contain;
     top: 25%;

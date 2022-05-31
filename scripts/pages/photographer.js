@@ -81,7 +81,8 @@ async function init() {
     
 
     // affichage d'une image cliquée dans la lightbox
-    const photosAffichees = document.querySelectorAll(" div.photograph-photos article img")
+    const photosAffichees = document.querySelectorAll(".photoAffichee, .videoAffichee")
+    console.log(photosAffichees)
     photosAffichees.forEach( 
         (uneSeulePhoto,indexUneSeulePhoto) => {
             uneSeulePhoto.addEventListener("click", () => {
@@ -132,6 +133,8 @@ async function init() {
             })
         }
     )
+
+
     // document.querySelector("div.photograph-photos article img").addEventListener(
     //     "onclick", (e) => 
     // )

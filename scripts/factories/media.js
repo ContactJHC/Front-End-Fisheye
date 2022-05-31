@@ -14,12 +14,14 @@ function media (dataOneArtwork) {
             const image = document.createElement('img')
             image.setAttribute('src', srcImage)
             image.setAttribute('alt', `Photographie intitulée ${title}`)
+            image.setAttribute('class', 'photoAffichee');
             return image
         } else {
             const encartVideo = document.createElement('div')
             encartVideo.setAttribute('class','divArticleVideo')
             const videoPlayer = document.createElement('video')
             videoPlayer.setAttribute('id','video')
+            videoPlayer.setAttribute('class', 'videoAffichee');
             // videoPlayer.setAttribute('controls', '')
             const iconePlayVideo = document.createElement('img')
             iconePlayVideo.setAttribute('class', 'iconeLectureVideo')
