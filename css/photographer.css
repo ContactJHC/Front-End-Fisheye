@@ -7,9 +7,9 @@ document.querySelector("#main > div.photograph-photos > article:nth-child(1) > i
 #main > div.photograph-photos > article:nth-child(9) > div.divArticleVideo
 */
 
-.htmlImage {
+/* .htmlImage {
     display: none;
-}
+} */
 
 .htmlVideo {
     display: block;

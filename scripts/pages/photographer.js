@@ -79,7 +79,6 @@ async function init() {
     })
 
     
-
     // affichage d'une image cliquée dans la lightbox
     const photosAffichees = document.querySelectorAll(".photoAffichee, .videoAffichee")
     console.log(photosAffichees)
@@ -87,13 +86,31 @@ async function init() {
         (uneSeulePhoto,indexUneSeulePhoto) => {
             uneSeulePhoto.addEventListener("click", () => {
                 // affichage photo
-                let sourcePhoto = uneSeulePhoto.getAttribute('src')
                 let indexPhoto = indexUneSeulePhoto
                 const LAlightbox = document.querySelector('#lightbox')
                 LAlightbox.style.display = 'block'
                 const lightboxContainerImg = document.querySelector('div.lightbox__container img')
-                lightboxContainerImg.setAttribute('src', sourcePhoto)
-                lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                const lightboxContainerVideo = document.querySelector('div.lightbox__container video')
+                const lightboxContainerVideoSource = document.querySelector('div.lightbox__container video source')
+                console.log(lightboxContainerVideoSource)
+                if (uneSeulePhoto.classList.contains('videoAffichee')) {
+                    let sourceVideo = arrayRefSrc[indexPhoto]
+                    console.log(sourceVideo);
+                    lightboxContainerImg.style.display = 'none'
+                    lightboxContainerVideo.style.display = 'block'
+                    lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                    lightboxContainerVideoSource.setAttribute('src', sourceVideo)
+                    lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
+                    console.log(lightboxContainerVideoSource)
+                                
+                } else {
+                    let sourcePhoto = uneSeulePhoto.getAttribute('src')
+                    console.log(sourcePhoto);
+                    lightboxContainerVideo.style.display = 'none'
+                    lightboxContainerImg.style.display = 'block'
+                    lightboxContainerImg.setAttribute('src', sourcePhoto)
+                    lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                }
                 // affichage du titre
                 let titreDeLaPhoto = document.querySelector('div.lightbox__title')
                 titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
@@ -102,12 +119,21 @@ async function init() {
                 const nombrePhotos = photosAffichees.length
                 flechePrecedent.addEventListener("click", () => {
                     if (indexPhoto == 0) {
+                        if (uneSeulePhoto.classList.contains('videoAffichee')) {
+                        lightboxContainerVideo.style.display = 'none'
+                        lightboxContainerImg.style.display = 'block'                        
+                        }
+
                         indexPhoto = nombrePhotos - 1
                         sourcePhoto = arrayRefSrc[indexPhoto]
                         lightboxContainerImg.setAttribute('src', sourcePhoto)
                         lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
                         titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                     } else { 
+                        if (uneSeulePhoto.classList.contains('videoAffichee')) {
+                            lightboxContainerVideo.style.display = 'none'
+                            lightboxContainerImg.style.display = 'block'                        
+                            }
                         indexPhoto = indexPhoto - 1 
                         sourcePhoto = arrayRefSrc[indexPhoto]
                         lightboxContainerImg.setAttribute('src', sourcePhoto)
@@ -118,12 +144,20 @@ async function init() {
                 const flecheSuivant = document.querySelector('.lightbox__next')
                 flecheSuivant.addEventListener('click', () => {
                     if (indexPhoto == nombrePhotos - 1) {
+                        if (uneSeulePhoto.classList.contains('videoAffichee')) {
+                            lightboxContainerVideo.style.display = 'none'
+                            lightboxContainerImg.style.display = 'block'                        
+                            }
                         indexPhoto = 0
                         sourcePhoto = arrayRefSrc[indexPhoto]
                         lightboxContainerImg.setAttribute('src', sourcePhoto)
                         lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
                         titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                     } else {
+                        if (uneSeulePhoto.classList.contains('videoAffichee')) {
+                            lightboxContainerVideo.style.display = 'none'
+                            lightboxContainerImg.style.display = 'block'                        
+                            }
                         indexPhoto = indexPhoto + 1
                         sourcePhoto = arrayRefSrc[indexPhoto]
                         lightboxContainerImg.setAttribute('src', sourcePhoto)
