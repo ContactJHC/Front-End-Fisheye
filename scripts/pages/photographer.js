@@ -42,14 +42,29 @@ async function init() {
     //  Récupère les photos du photographe dont la page est affichée
     const allMediaOnePhotographer = 
         allData.media.filter(e => e.photographerId == idOnePhotographer)
+    // Tri par titre (title), popularité (likes), date(date)
+    // création de 3 tableaux reprenant ces jeux de données
+    let arrayCompareTitle = []
+    let arrayCompareLikes = []
+    let arrayCompareDate = []
 
-    // exemple comme quoi un addeventlistener dans init() permet d'être 
-    // actif en dehors du scope de la fonction 
-    // const bout = document.querySelector('.toutsimpl')
-    
-    // bout.addEventListener('click',()=>{
-    //     console.log(allMediaOnePhotographer)
-    // })
+    allMediaOnePhotographer.forEach((e) => {
+        arrayCompareTitle.push(e.title)
+        arrayCompareLikes.push(e.likes)
+        arrayCompareDate.push(e.date)
+        console.log(arrayCompareTitle)
+        console.log(arrayCompareLikes)
+        console.log(arrayCompareDate)
+    })
+     
+    // Tri des titres par ordre alphabétique, tri des likes par ordre croissant, tri des dates par ancienneté
+    arrayCompareTitle.sort()
+    arrayCompareLikes.sort(function(a, b) {
+        return a - b;
+      })
+    arrayCompareDate.sort()
+
+
     // Affiche les photos
     displayPhotos(allMediaOnePhotographer)
     // Créer la lightbox - récupérer src, implémenter un indice, récupérer le titre

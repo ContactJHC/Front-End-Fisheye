@@ -319,3 +319,38 @@ form input #messenger {
     border-radius : 5px;
     
 }
+
+#tri {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    margin-left: 5%;
+}
+
+#tri p{
+    font-weight: bold;
+    margin-right: 5px;   
+    padding: 16px;
+    height: 30px;
+}
+
+#tri ul {
+    list-style: none;
+    font-weight: bold;
+    color: white;
+    border: none;
+    background-color: #901C1C;
+    border-radius: 5px;
+    padding: 6px;
+    
+}
+
+#tri ul li {
+    border-top: 1px white solid;    
+    padding: 10px;
+    cursor: pointer;
+}
+
+#menu-deroulant > li:nth-child(1) {
+    border-top: none;
+}
