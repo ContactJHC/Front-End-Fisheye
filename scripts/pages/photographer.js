@@ -119,7 +119,6 @@ async function init() {
 
 
 
-
     // Affiche les photos
     displayPhotos(allMediaOnePhotographer)
     // Créer la lightbox - récupérer src, implémenter un indice, récupérer le titre
