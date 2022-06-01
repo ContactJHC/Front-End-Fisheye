@@ -42,19 +42,19 @@ async function init() {
     //  Récupère les photos du photographe dont la page est affichée
     const allMediaOnePhotographer = 
         allData.media.filter(e => e.photographerId == idOnePhotographer)
+        console.log(allMediaOnePhotographer)
     // Tri par titre (title), popularité (likes), date(date)
     // création de 3 tableaux reprenant ces jeux de données
     let arrayCompareTitle = []
     let arrayCompareLikes = []
     let arrayCompareDate = []
+    
 
     allMediaOnePhotographer.forEach((e) => {
         arrayCompareTitle.push(e.title)
         arrayCompareLikes.push(e.likes)
         arrayCompareDate.push(e.date)
-        console.log(arrayCompareTitle)
-        console.log(arrayCompareLikes)
-        console.log(arrayCompareDate)
+        // tableauLikesApresTri.push('')
     })
      
     // Tri des titres par ordre alphabétique, tri des likes par ordre croissant, tri des dates par ancienneté
@@ -63,6 +63,61 @@ async function init() {
         return a - b;
       })
     arrayCompareDate.sort()
+    // seuls les tris par popularité (likes) et date (dates) sont exigés - cf notes de réunion : maquette pas à jour
+    // Création d'une nouvelle fonction pour trier directement par likes croissant
+    //  un tableau duplicata de allMediaOnePhotographer
+    // attention reference type donc duplicata de chaque valeur et non de chaque pointeur
+    let sortedByLikesAllMediaOnePhotographer = []
+    let sortedByDatesAllMediaOnePhotographer = []
+    allMediaOnePhotographer.forEach(element => {
+        sortedByLikesAllMediaOnePhotographer.push(element)
+        sortedByDatesAllMediaOnePhotographer.push(element)
+    });
+
+    console.log(sortedByDatesAllMediaOnePhotographer)
+    const declencheurTriLikes = document.querySelector('#tri-likes')
+    sortedByLikesAllMediaOnePhotographer.sort(function(a, b) {
+        return b.likes - a.likes;
+      })
+    
+    declencheurTriLikes.addEventListener('click', () => {
+        const allArticles = document.querySelectorAll('article')
+        allArticles.forEach(e => e.style.display = 'none')
+        displayPhotos(sortedByLikesAllMediaOnePhotographer)
+    })
+
+    const declencheurTriDate = document.querySelector('#tri-dates')
+    sortedByDatesAllMediaOnePhotographer.sort(function(a,b) {
+        return b.date - a.date;
+    }) 
+
+    declencheurTriDate.addEventListener('click', () => {
+        const allArticles = document.querySelectorAll('article')
+        allArticles.forEach(e => e.style.display = 'none')
+        displayPhotos(sortedByDatesAllMediaOnePhotographer)
+    })
+    
+    // CETTE VERSION NE PERMET PAS DE GERER LES EXCEPTIONS DEGALITE ET DONC RENVOIE UN TABLEAU TROP GRAND
+    // declencheurTriLikes.addEventListener('click', () => {
+    //     for (let indi = 0; indi < arrayCompareLikes.length; indi ++) {
+    //         console.log(indi);
+    //         allMediaOnePhotographer.forEach( (e) => {
+    //             if (e.likes == arrayCompareLikes[indi]) {
+    //                 tableauLikesApresTri.push(e)
+    //                 console.log(e.likes)
+    //                 console.log(arrayCompareLikes[indi])
+    //                 console.log(tableauLikesApresTri);
+    //             } else {
+    //                 console.log(e.likes)
+    //                 console.log(arrayCompareLikes[indi])
+    //                 console.log(tableauLikesApresTri);
+    //             }
+    //         })
+    //     }
+    // })
+    // CETTE VERSION NE PERMET PAS DE GERER LES EXCEPTIONS DEGALITE ET DONC RENVOIE UN TABLEAU TROP GRAND
+
+
 
 
     // Affiche les photos

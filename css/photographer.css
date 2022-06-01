@@ -338,19 +338,33 @@ form input #messenger {
     list-style: none;
     font-weight: bold;
     color: white;
-    border: none;
-    background-color: #901C1C;
-    border-radius: 5px;
     padding: 6px;
+    background-color: #901C1C;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
     
 }
 
-#tri ul li {
-    border-top: 1px white solid;    
+ul li {
     padding: 10px;
     cursor: pointer;
+    background-color: #901C1C;
+    border: none;
+    border-top: 1px white solid;
+    
+
 }
 
 #menu-deroulant > li:nth-child(1) {
     border-top: none;
 }
+
+/* #tri-dates { 
+    visibility: hidden;
+    transition: visibility 300ms ease-in-out;
+}
+
+#tri-likes:hover #tri-dates {
+    visibility: visible;
+} */
