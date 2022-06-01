@@ -263,13 +263,23 @@ async function init() {
     //     arrayIndexSrcTitle.push(allMediaOnePhotographer)
 
     // })
-    // Affiche la bannière fixe avec les prix
+    // Affiche la bannière fixe avec les prix et les likes
     const fixedBanner = document.createElement('div')
+    const likesFixedBanner = document.createElement('div')
+    const priceFixedBanner = document.createElement('div')
     fixedBanner.setAttribute('class','likesAndPriceBanner')
     const photographerData = allData.photographers.filter(e=>e.id==idOnePhotographer)[0]
     const photographerPrice = photographerData.price
-    fixedBanner.textContent = `${photographerPrice}€/jour`
+    // initialisation du nombre de likes puis calcul du nombre de likes par itération des oeuvres du photographe
+    let photographerLikes = 0
+    allMediaOnePhotographer.forEach( (e) => {
+        photographerLikes += e.likes
+    })
+    likesFixedBanner.textContent = `${photographerLikes} \u2665`
+    priceFixedBanner.textContent = `${photographerPrice}€/jour`
     document.querySelector('#main').appendChild(fixedBanner)
+    fixedBanner.appendChild(likesFixedBanner)
+    fixedBanner.appendChild(priceFixedBanner)
     // Affiche l'entête 
     const photographHeader = document.querySelector('.photograph-header')    
     const photographerNameAndCity = document.createElement('div')

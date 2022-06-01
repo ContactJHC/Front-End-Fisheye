@@ -315,7 +315,7 @@ form input #messenger {
     background-color: #DB8876;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-around;
     border-radius : 5px;
     
 }
