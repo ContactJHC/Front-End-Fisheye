@@ -53,6 +53,7 @@ async function init() {
     // Affiche les photos
     displayPhotos(allMediaOnePhotographer)
     // Créer la lightbox - récupérer src, implémenter un indice, récupérer le titre
+    
     let arrayRefSrc = []
     let arrayIndex = []
     let arrayTitle = []
@@ -78,12 +79,10 @@ async function init() {
         }
     })
 
-    console.log(arrayTitle);
 
     
     // affichage d'une image cliquée dans la lightbox
     const photosAffichees = document.querySelectorAll(".photoAffichee, .videoAffichee")
-    console.log(photosAffichees)
     const lightboxContainerVideo = document.createElement('video')
     const lightboxContainerVideoSource = document.createElement('source')
 
@@ -280,6 +279,34 @@ async function init() {
     document.querySelector('#main').appendChild(fixedBanner)
     fixedBanner.appendChild(likesFixedBanner)
     fixedBanner.appendChild(priceFixedBanner)
+// création d'une écoute d'événements pour chaque clic sur les likes de chaque card et màj du total local et global
+    // Ajout d'un tableau de booléen pour consulter la valeur cliquée ou non de l'élément .likes
+    // de chaque card individuelle
+    arrayLikesOneCard = []  
+    arrayBool = []
+    allMediaOnePhotographer.forEach( (e) => {
+        arrayLikesOneCard.push(e.likes)
+        arrayBool.push('true')
+    })
+    arrayLikesAllCard = document.querySelectorAll('article .likes')
+    arrayLikesAllCard.forEach((e,i) => {
+        arrayLikesAllCard[i].addEventListener('click', () => {
+            if (arrayBool[i]) {
+                arrayLikesOneCard[i] ++
+                e.textContent = `${arrayLikesOneCard[i]} \u2665`
+                arrayBool[i] = false
+                photographerLikes ++
+                likesFixedBanner.textContent = `${photographerLikes} \u2665`
+            } else {
+                arrayLikesOneCard[i] --
+                e.textContent = `${arrayLikesOneCard[i]} \u2665`
+                arrayBool[i] = true
+                photographerLikes --
+                likesFixedBanner.textContent = `${photographerLikes} \u2665`
+            }
+        })
+    })
+
     // Affiche l'entête 
     const photographHeader = document.querySelector('.photograph-header')    
     const photographerNameAndCity = document.createElement('div')
