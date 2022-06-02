@@ -114,7 +114,7 @@ async function init() {
     //     }
     // })
     // CETTE VERSION NE PERMET PAS DE GERER LES EXCEPTIONS DEGALITE ET DONC RENVOIE UN TABLEAU TROP GRAND
-
+  
     // Affiche les photos
     displayPhotos(allMediaOnePhotographer)
     // Créer la lightbox - récupérer src, implémenter un indice, récupérer le titre

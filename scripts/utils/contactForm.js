@@ -28,6 +28,14 @@ function closeModal() {
 
 }
 
+// fermeture de la modale à l'appui sur la touche Echap
+
+modal.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeModal()
+  }
+})
+
 // // // Vérification de la validité du prénom renseigné 
 
 const prenom = document.querySelector('#first');

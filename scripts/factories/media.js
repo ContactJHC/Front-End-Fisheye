@@ -15,6 +15,7 @@ function media (dataOneArtwork) {
             image.setAttribute('src', srcImage)
             image.setAttribute('alt', `Photographie intitulée ${title}`)
             image.setAttribute('class', 'photoAffichee');
+            image.setAttribute('tabindex', '1')
             return image
         } else {
             const encartVideo = document.createElement('div')
@@ -33,6 +34,7 @@ function media (dataOneArtwork) {
             encartVideo.appendChild(iconePlayVideo)
             encartVideo.appendChild(videoPlayer)
             videoPlayer.appendChild(source)
+            encartVideo.setAttribute('tabindex', '1')
             return encartVideo
         }
     }

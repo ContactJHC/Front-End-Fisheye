@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
@@ -9,7 +9,7 @@
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <img src="assets/images/logo.png" class="logo" alt="logo du site"/>
     </header>
     <main id="main">
       <div class="photograph-header">
@@ -29,9 +29,9 @@
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
-          <img id="modalCloseBtn" src="assets/icons/close.svg" onclick="closeModal()" />
+          <img id="modalCloseBtn" src="assets/icons/close.svg" onclick="closeModal()" alt="croix de fermeture du formulaire" aria-label="fermer"/>
         </header>
-				<form id="formulaire" onsubmit= "return false">
+				<form id="formulaire" role="dialog" onsubmit= "return false">
 					<div class="formData">
 						<label for="first">Prénom</label>
 						<input
