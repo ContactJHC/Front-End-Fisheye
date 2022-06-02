@@ -42,7 +42,6 @@ async function init() {
     //  Récupère les photos du photographe dont la page est affichée
     const allMediaOnePhotographer = 
         allData.media.filter(e => e.photographerId == idOnePhotographer)
-        console.log(allMediaOnePhotographer)
     // Tri par titre (title), popularité (likes), date(date)
     // création de 3 tableaux reprenant ces jeux de données
     let arrayCompareTitle = []
@@ -74,7 +73,6 @@ async function init() {
         sortedByDatesAllMediaOnePhotographer.push(element)
     });
 
-    console.log(sortedByDatesAllMediaOnePhotographer)
     const declencheurTriLikes = document.querySelector('#tri-likes')
     sortedByLikesAllMediaOnePhotographer.sort(function(a, b) {
         return b.likes - a.likes;

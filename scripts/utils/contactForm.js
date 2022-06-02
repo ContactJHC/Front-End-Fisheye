@@ -1,7 +1,8 @@
 const modal = document.getElementById("contact_modal")
-const mainHTML = document.getElementById('#main')
+const mainHTML = document.getElementById('main')
 const modalCloseBtn = document.querySelector('#modalCloseBtn')
 const boutonEnvoi = document.querySelector('.contact_button')
+const body = document.querySelector('body')
 
 function displayModal() {
     // affichage de la modale
@@ -11,7 +12,6 @@ function displayModal() {
     mainHTML.setAttribute('aria-hidden', 'true')
     modal.setAttribute('aria-hidden','false')
     modal.setAttribute('role','dialog')
-    $body.addClass('no-scroll')
     // focus sur le bouton de fermeture de la modale
     modalCloseBtn.focus()
 }
@@ -23,21 +23,10 @@ function closeModal() {
     // masquage modale et affichage html - accessibilité
     modal.setAttribute('aria-hidden','true')
     mainHTML.setAttribute('aria-hidden','false')
-    $body.removeClass('no-scroll')
     // focus sur le bouton d'ouverture de la modale
     boutonEnvoi.focus()
 
 }
-
-// fermeture de la modale en appyant sur 'Echap' 
-
-// $(document).on('keydown', e => {
-//   const keyCode = e.keyCode ? e.keyCode : e.which
-
-//   if (modal.attr('aria-hidden') == 'false' && keyCode === 27) {
-//     closeModal()
-//   }
-// })
 
 // // // Vérification de la validité du prénom renseigné 
 
@@ -125,16 +114,26 @@ const outputData = {
 }
 
 function validate() {
-    // alert('alerte')
-    // let resultat = verifEmail() && verifMessage() && verifPrenom() && verifNom()
-    // if (resultat) {
-    //     closeModal()
-    //     console.log(outputData)
-    // } else {
-    //     return false
-    // }
+    
+    let resultat = verifEmail() && verifMessage() && verifPrenom() && verifNom()
+    if (resultat) {
+        let outputData = {
+          'prénom': prenom.value,
+          'nom': nom.value,
+          'email': email.value,
+          'message': message.value,
+      }
+        console.log(outputData)
+        closeModal()
+        
+    } else {
+        return false
+    }
     return false
 }
+
+const boutonEnvoiFormulaire = document.querySelector('#formulaire > button')
+boutonEnvoiFormulaire.addEventListener('click', validate)
 
 
 
