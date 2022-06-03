@@ -206,7 +206,7 @@ main .photograph-header .photographerPicture {
 
 .photograph-photos article {
     width: 100%;
-    height: 200px;
+    height: 300px;
     /* utilisation de Flexbox pour espacer visuellement la description 'alt' et le texte
     de la photo en cas de 404 sur la GET photo */
     display: flex;
@@ -222,6 +222,7 @@ main .photograph-header .photographerPicture {
 
 .photograph-photos img {
     object-fit: cover;
+    overflow: hidden;
 }
 
 .titleAndLikes {
@@ -373,6 +374,10 @@ ul li {
 
 #menu-deroulant > li:nth-child(1) {
     border-top: none;
+}
+
+#tri-dates {
+    display: none;
 }
 
 /* #tri-dates { 

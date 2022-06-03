@@ -88,11 +88,17 @@ async function init() {
     sortedByDatesAllMediaOnePhotographer.sort(function(a,b) {
         return b.date - a.date;
     }) 
-
+ 
     declencheurTriDate.addEventListener('click', () => {
         const allArticles = document.querySelectorAll('article')
         allArticles.forEach(e => e.style.display = 'none')
         displayPhotos(sortedByDatesAllMediaOnePhotographer)
+    })
+
+    // affichage des possibilités de tri au clic sur le bouton 'popularité'
+
+    declencheurTriLikes.addEventListener('mouseover', () => {
+        declencheurTriDate.style.display = 'block'
     })
     
     // CETTE VERSION NE PERMET PAS DE GERER LES EXCEPTIONS DEGALITE ET DONC RENVOIE UN TABLEAU TROP GRAND
@@ -144,7 +150,9 @@ async function init() {
         }
     })
 
+    // affichage des boutons de tri
 
+    
     
     // affichage d'une image cliquée dans la lightbox
     const photosAffichees = document.querySelectorAll(".photoAffichee, .videoAffichee")
