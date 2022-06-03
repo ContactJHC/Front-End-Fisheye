@@ -14,9 +14,11 @@ function displayModal() {
     modal.setAttribute('role','dialog')
     // focus sur le bouton de fermeture de la modale
     modalCloseBtn.focus()
+    mainHTML.classList.add('no-scroll')
 }
 
 function closeModal() {
+    mainHTML.classList.remove('no-scroll')
     modal.style.display = "none";
     // réinitisaliser le formulaire à la fermeture et à l'envoi
     document.querySelector("#formulaire").reset();

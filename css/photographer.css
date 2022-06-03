@@ -1,6 +1,9 @@
 .no-scroll {
+    height: 80vh;
     overflow: hidden;
  }
+
+
 
 /* 
 document.querySelector("#main > div.photograph-photos > article:nth-child(1) > img")
@@ -198,6 +201,7 @@ main .photograph-header .photographerPicture {
     grid-template-columns: repeat(3,1fr);
     gap: 30px;
     margin: 3%;
+
 }
 
 .photograph-photos article {
@@ -260,6 +264,8 @@ main .photograph-header .photographerPicture {
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
     
 }
 
