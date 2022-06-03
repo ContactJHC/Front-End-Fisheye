@@ -310,15 +310,28 @@ async function init() {
                         sourceVideo = arrayRefSrc[indexPhoto]
                         lightboxContainerImg.style.display = 'none'
                         lightboxContainerVideo.style.display = 'block'
+                        lightboxContainerImg.setAttribute('aria-hidden', 'true')
+                        lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                        lightboxContainerVideo.setAttribute('class', 'htmlVideo')
+                        lightboxContainerVideo.setAttribute('controls', '')
                         lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
                         lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                         lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
+                        lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
+                        lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
                         titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                        croixDeFermeture.addEventListener('click', () => {
+                            LAlightbox.style.display = 'none'
+                            lightboxContainerVideo.style.display = 'none'
+                            lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                        })
                     } else {
                         // cas : passer d'une image à une image suivante en fin de liste
                         sourcePhoto = arrayRefSrc[indexPhoto]
                         lightboxContainerImg.style.display = 'block'
                         lightboxContainerVideo.style.display = 'none'
+                        lightboxContainerImg.setAttribute('aria-hidden', 'false')
+                        lightboxContainerVideo.setAttribute('aria-hidden', 'true')
                         lightboxContainerImg.setAttribute('src', sourcePhoto)
                         lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
                         titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
@@ -335,15 +348,28 @@ async function init() {
                         sourceVideo = arrayRefSrc[indexPhoto]
                         lightboxContainerImg.style.display = 'none'
                         lightboxContainerVideo.style.display = 'block'
+                        lightboxContainerImg.setAttribute('aria-hidden', 'true')
+                        lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                        lightboxContainerVideo.setAttribute('class', 'htmlVideo')
+                        lightboxContainerVideo.setAttribute('controls', '')
                         lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
                         lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                         lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
+                        lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
+                        lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
                         titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                        croixDeFermeture.addEventListener('click', () => {
+                            LAlightbox.style.display = 'none'
+                            lightboxContainerVideo.style.display = 'none'
+                            lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                        })
                     //cas : passer d'une image à une image suivante quel que soit indice non final de la liste 
                     } else {
                         sourcePhoto = arrayRefSrc[indexPhoto]
                         lightboxContainerImg.style.display = 'block'
                         lightboxContainerVideo.style.display = 'none'
+                        lightboxContainerImg.setAttribute('aria-hidden', 'false')
+                        lightboxContainerVideo.setAttribute('aria-hidden', 'true')
                         lightboxContainerImg.setAttribute('src', sourcePhoto)
                         lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
                         titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
