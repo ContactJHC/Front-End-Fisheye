@@ -1,0 +1,15 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 13
+    },
+    "rules": {
+        "accessor-pairs": "error",
+        "array-bracket-newline": "error",
+        "array-bracket-spacing": "error"
+    }
+}

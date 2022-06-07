@@ -23,7 +23,7 @@ function closeModal() {
     // réinitisaliser le formulaire à la fermeture et à l'envoi
     document.querySelector("#formulaire").reset();
     // masquage modale et affichage html - accessibilité
-    modal.setAttribute('aria-hidden','true')
+    modal.setAttribute('aria-hidden','true');
     mainHTML.setAttribute('aria-hidden','false')
     // focus sur le bouton d'ouverture de la modale
     boutonEnvoi.focus()

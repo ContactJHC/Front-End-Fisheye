@@ -86,7 +86,7 @@ async function init() {
 
     const declencheurTriDate = document.querySelector('#tri-dates')
     sortedByDatesAllMediaOnePhotographer.sort(function(a,b) {
-        return b.date - a.date;
+        return b.date < a.date ? 1 : -1 ;
     }) 
  
     declencheurTriDate.addEventListener('click', () => {
