@@ -1,13 +1,10 @@
     async function getPhotographers() {
         // Penser à remplacer par les données récupérées dans le json
-        let photographers = [
-        ]
+        let photographers = []
 
         await fetch('data/photographers.json').then(async (response) => {
             let data = await response.json()
-            console.log(data.photographers)
             photographers = data.photographers    
-            console.log(photographers)
         }).catch((err) => {
             console.log('rejected', err)
             })
@@ -26,13 +23,13 @@
             const userCardDOM = photographerModel.getUserCardDOM();
             photographersSection.appendChild(userCardDOM);
         });
-    };
+    }
 
     async function init() {
         // Récupère les datas des photographes
         const { photographers } = await getPhotographers();
         displayData(photographers);
-    };
+    }
     
     init();
     

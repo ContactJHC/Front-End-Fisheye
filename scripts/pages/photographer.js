@@ -231,7 +231,7 @@ async function init() {
                         lightboxContainerImg.setAttribute('aria-hidden', 'true')
                         lightboxContainerVideo.setAttribute('aria-hidden', 'false')
                         lightboxContainerImg.style.display = 'none'
-                        sourceVideo = arrayRefSrc[indexPhoto]
+                        let sourceVideo = arrayRefSrc[indexPhoto]
                         lightboxContainerVideo.setAttribute('class', 'htmlVideo')
                         lightboxContainerVideo.setAttribute('controls', '')
                         lightboxContainerVideoSource.setAttribute('src', sourceVideo)
@@ -248,7 +248,7 @@ async function init() {
                         titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
         // cas : passer d'une image à une image précente en début de liste
                     } else {
-                        sourcePhoto = arrayRefSrc[indexPhoto]
+                        let sourcePhoto = arrayRefSrc[indexPhoto]
                         lightboxContainerImg.style.display = 'block'
                         lightboxContainerVideo.setAttribute('aria-hidden', 'true')
                         lightboxContainerImg.setAttribute('aria-hidden', 'false')
@@ -272,7 +272,7 @@ async function init() {
                     indexPhoto = indexPhoto - 1 
                     // cas : passer d'une image à une vidéo précédente qqs indice non nul
                     if (photosAffichees[indexPhoto].classList.contains('videoAffichee')) {
-                        sourceVideo = arrayRefSrc[indexPhoto]
+                        let sourceVideo = arrayRefSrc[indexPhoto]
                         lightboxContainerImg.style.display = 'none'
                         lightboxContainerImg.setAttribute('aria-hidden', 'true')
                         lightboxContainerVideo.setAttribute('aria-hidden', 'false')
@@ -293,7 +293,7 @@ async function init() {
                         titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                     //cas : passer d'une image à une image précédente qqs indice non nul
                     } else {
-                        sourcePhoto = arrayRefSrc[indexPhoto]
+                        let sourcePhoto = arrayRefSrc[indexPhoto]
                         lightboxContainerImg.style.display = 'block'
                         lightboxContainerVideo.style.display = 'none'
                         lightboxContainerVideo.setAttribute('aria-hidden', 'true')
@@ -315,7 +315,7 @@ async function init() {
                     indexPhoto = 0
                     //cas : passer d'une image à une vidéo suivante en fin de liste
                     if (photosAffichees[indexPhoto].classList.contains('videoAffichee')) {
-                        sourceVideo = arrayRefSrc[indexPhoto]
+                        let sourceVideo = arrayRefSrc[indexPhoto]
                         lightboxContainerImg.style.display = 'none'
                         lightboxContainerVideo.style.display = 'block'
                         lightboxContainerImg.setAttribute('aria-hidden', 'true')
@@ -335,7 +335,7 @@ async function init() {
                         })
                     } else {
                         // cas : passer d'une image à une image suivante en fin de liste
-                        sourcePhoto = arrayRefSrc[indexPhoto]
+                        let sourcePhoto = arrayRefSrc[indexPhoto]
                         lightboxContainerImg.style.display = 'block'
                         lightboxContainerVideo.style.display = 'none'
                         lightboxContainerImg.setAttribute('aria-hidden', 'false')
@@ -353,7 +353,7 @@ async function init() {
                     indexPhoto = indexPhoto + 1
                     //cas : passer d'une image à une vidéo suivante quel que soit indice non final de la liste
                     if (photosAffichees[indexPhoto].classList.contains('videoAffichee')) {
-                        sourceVideo = arrayRefSrc[indexPhoto]
+                        let sourceVideo = arrayRefSrc[indexPhoto]
                         lightboxContainerImg.style.display = 'none'
                         lightboxContainerVideo.style.display = 'block'
                         lightboxContainerImg.setAttribute('aria-hidden', 'true')
@@ -373,7 +373,7 @@ async function init() {
                         })
                     //cas : passer d'une image à une image suivante quel que soit indice non final de la liste 
                     } else {
-                        sourcePhoto = arrayRefSrc[indexPhoto]
+                        let sourcePhoto = arrayRefSrc[indexPhoto]
                         lightboxContainerImg.style.display = 'block'
                         lightboxContainerVideo.style.display = 'none'
                         lightboxContainerImg.setAttribute('aria-hidden', 'false')
@@ -419,13 +419,13 @@ async function init() {
 // création d'une écoute d'événements pour chaque clic sur les likes de chaque card et màj du total local et global
     // Ajout d'un tableau de booléen pour consulter la valeur cliquée ou non de l'élément .likes
     // de chaque card individuelle
-    arrayLikesOneCard = []  
-    arrayBool = []
+    let arrayLikesOneCard = []  
+    let arrayBool = []
     allMediaOnePhotographer.forEach( (e) => {
         arrayLikesOneCard.push(e.likes)
         arrayBool.push('true')
     })
-    arrayLikesAllCard = document.querySelectorAll('article .likes')
+    let arrayLikesAllCard = document.querySelectorAll('article .likes')
     arrayLikesAllCard.forEach((e,i) => {
         arrayLikesAllCard[i].addEventListener('click', () => {
             if (arrayBool[i]) {
@@ -469,9 +469,14 @@ async function init() {
     photographerNameAndCity.appendChild(photographerQuote)
     photographHeader.appendChild(photographerPictureDiv)
     photographerPictureDiv.appendChild(photographerPicture)
+    // écoute d'événement : ouverture de la modale avec nom photographe
+    const boutonModale = document.querySelector('.contact_button')
+    boutonModale.addEventListener('click',displayModal(`${photographerData.name}`))
+
+
     // 
 
-};
+}
 
 init();
 

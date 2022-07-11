@@ -242,6 +242,7 @@ main .photograph-header .photographerPicture {
 .contact_button {
     font-size: 20px;
     font-weight: bold;
+    margin-top: 20px;
     color: white;
     padding: 11px;
     width: 170px;
@@ -255,7 +256,7 @@ main .photograph-header .photographerPicture {
 .modal {
     position: fixed;
     top: 5%;
-    width: 50%;
+    width: 30%;
     left: 25%;
     border-radius: 5px;
     background-color: #DB8876;
@@ -270,7 +271,7 @@ main .photograph-header .photographerPicture {
     
 }
 
-.modal header {
+.modal #headerModal {
     justify-content: space-between;
     width: 100%;
 }
@@ -303,7 +304,7 @@ form div {
     flex-direction: column;
     width: 100%;
     align-items: self-start;
-    margin-bottom: 26px;
+    margin-bottom: 5px;
 }
 
 form input {

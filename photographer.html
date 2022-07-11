@@ -9,11 +9,13 @@
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" alt="logo du site"/>
+      <a href="./index.html">
+        <img src="assets/images/logo.png" class="logo" alt="logo du site"/>
+      </a>
     </header>
     <main id="main">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button">Contactez-moi</button>
       </div>
       <div id="tri">
         <p>Trier par</p>
@@ -26,12 +28,12 @@
       </div>
     </main>
     <div id="contact_modal">
-			<div class="modal">
-				<header>
+			<div class="modal" role="dialog">
+				<div id="headerModal" >
           <h2>Contactez-moi</h2>
           <img id="modalCloseBtn" src="assets/icons/close.svg" onclick="closeModal()" alt="croix de fermeture du formulaire" aria-label="fermer"/>
-        </header>
-				<form id="formulaire" role="dialog" onsubmit= "return false">
+        </div>
+				<form id="formulaire" onsubmit= "return false">
 					<div class="formData">
 						<label for="first">Prénom</label>
 						<input

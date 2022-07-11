@@ -2,19 +2,24 @@ const modal = document.getElementById("contact_modal")
 const mainHTML = document.getElementById('main')
 const modalCloseBtn = document.querySelector('#modalCloseBtn')
 const boutonEnvoi = document.querySelector('.contact_button')
-const body = document.querySelector('body')
 
-function displayModal() {
-    // affichage de la modale
-	  modal.style.display = "block";
-    // masquage de la page html en terme d'accessibilité lorsque la modale est ouverte
-    // affichage de la modale - accessibilité
-    mainHTML.setAttribute('aria-hidden', 'true')
-    modal.setAttribute('aria-hidden','false')
-    modal.setAttribute('role','dialog')
-    // focus sur le bouton de fermeture de la modale
-    modalCloseBtn.focus()
-    mainHTML.classList.add('no-scroll')
+function displayModal(nomPhotographe) {
+  // affichage de la modale
+  modal.style.display = "block";
+  // masquage de la page html en terme d'accessibilité lorsque la modale est ouverte
+  // affichage de la modale - accessibilité
+  mainHTML.setAttribute('aria-hidden', 'true')
+  modal.setAttribute('aria-hidden','false')
+  modal.setAttribute('role','dialog')
+  const parentNode = document.querySelector('.modal')
+  const formModal = document.querySelector('#formulaire')
+  const underHeader = document.createElement('div')
+  underHeader.setAttribute('id','underHeader')
+  underHeader.textContent = nomPhotographe
+  parentNode.insertBefore(underHeader,formModal)
+  // focus sur le bouton de fermeture de la modale
+  modalCloseBtn.focus()
+  mainHTML.classList.add('no-scroll')
 }
 
 function closeModal() {
@@ -45,13 +50,13 @@ const testPrenom = /^[a-z ,.'-]{2,30}$/i;
 const spanPrenom = document.querySelector(".aidesFirst");
 
 function verifPrenom () {
-	if(testPrenom.test(prenom.value)){
-        spanPrenom.style.display = "none";
-	  return true;
-	} else {
-	  spanPrenom.style.display = "block";
-	  return false;
-	}
+  if(testPrenom.test(prenom.value)){
+    spanPrenom.style.display = "none";
+    return true;
+  } else {
+    spanPrenom.style.display = "block";
+    return false;
+}
 }
 prenom.addEventListener("keyup", verifPrenom);
 
