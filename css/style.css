@@ -13,6 +13,9 @@ header, #headerModal {
     height: 90px;
 }
 
+#headerModal {
+    height: fit-content;
+}
 
 
 .logo {

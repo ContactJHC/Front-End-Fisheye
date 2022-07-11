@@ -262,7 +262,6 @@ main .photograph-header .photographerPicture {
     background-color: #DB8876;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: space-between;
     padding: 35px;
     margin: auto;
@@ -281,10 +280,15 @@ main .photograph-header .photographerPicture {
     cursor: pointer;
 }
 
-.modal header h2 {
+.modal h2, #underHeader {
+    color: black;
     font-size: 2rem;
     font-weight: normal;
-    text-align: center;
+    /* text-align: center; */
+}
+
+#underHeader {
+    margin-bottom: 20px;
 }
 
 form {
@@ -319,8 +323,19 @@ form span {
     display: none;
 }
 
-form input #messenger {
-    height: 140px;
+#boutonFin {
+    height: 2.5rem;
+    width: 7rem;
+    font-size: 0.8rem;
+    font-weight: initial;
+}
+
+form input#messenger {
+    height: 8rem;
+}
+
+#modalCloseBtn {
+    height: 1.5rem;
 }
 
 .likesAndPriceBanner {
