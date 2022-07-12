@@ -459,10 +459,10 @@ async function sortsFunction(allMediaOnePhotographer) {
     //  un tableau duplicata de allMediaOnePhotographer
     // attention reference type donc duplicata de chaque valeur et non de chaque pointeur
     let sortedByLikesAllMediaOnePhotographer = []
-    let sortedByDatesAllMediaOnePhotographer = []
+    let sortedByTitlesAllMediaOnePhotographer = []
     allMediaOnePhotographer.forEach(element => {
         sortedByLikesAllMediaOnePhotographer.push(element)
-        sortedByDatesAllMediaOnePhotographer.push(element)
+        sortedByTitlesAllMediaOnePhotographer.push(element)
     });
 
     // écoute d'événement pour tri par popularité
@@ -478,22 +478,38 @@ async function sortsFunction(allMediaOnePhotographer) {
         likesFunction(sortedByLikesAllMediaOnePhotographer, alld)
     })
 
-    // écoute d'événement pour tri par date
-    const declencheurTriDate = document.querySelector('#tri-dates')
-    sortedByDatesAllMediaOnePhotographer.sort(function(a,b) {
-        return b.date < a.date ? 1 : -1 ;
-    }) 
+    // écoute d'événement pour tri par popularité
+    const declencheurTriTitre = document.querySelector('#tri-titre')
+    sortedByTitlesAllMediaOnePhotographer.sort(function(a, b) {
+            if (a.title < b.title) {return -1}
+            if (a.title > b.title) {return 1}
+            return 0
+        }
+    )
     
-    declencheurTriDate.addEventListener('click', () => {
+        declencheurTriTitre.addEventListener('click', () => {
         deleteArticles()
-        displayPhotos(sortedByLikesAllMediaOnePhotographer)
-        lightboxFunction(sortedByLikesAllMediaOnePhotographer)
-        likesFunction(sortedByLikesAllMediaOnePhotographer, alld)
+        displayPhotos(sortedByTitlesAllMediaOnePhotographer)
+        lightboxFunction(sortedByTitlesAllMediaOnePhotographer)
+        likesFunction(sortedByTitlesAllMediaOnePhotographer, alld)
     })
+
+    // // écoute d'événement pour tri par date - tri par date apparaît sur la maquette mais n'est pas demandé 
+    // const declencheurTriDate = document.querySelector('#tri-dates')
+    // sortedByDatesAllMediaOnePhotographer.sort(function(a,b) {
+    //     return b.date < a.date ? 1 : -1 ;
+    // }) 
+    
+    // declencheurTriDate.addEventListener('click', () => {
+    //     deleteArticles()
+    //     displayPhotos(sortedByLikesAllMediaOnePhotographer)
+    //     lightboxFunction(sortedByLikesAllMediaOnePhotographer)
+    //     likesFunction(sortedByLikesAllMediaOnePhotographer, alld)
+    // })
 
     // affichage des possibilités de tri au clic sur le bouton 'popularité'
     declencheurTriLikes.addEventListener('mouseover', () => {
-        declencheurTriDate.style.display = 'block'
+        declencheurTriTitre.style.display = 'block'
     })
 }
 
