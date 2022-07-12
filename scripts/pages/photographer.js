@@ -35,102 +35,26 @@ function displayPhotos(dataAllMediaOneID) {
 const params = (new URL(document.location)).searchParams
 const idOnePhotographer = params.get('id')
 
-
-async function init() {
+async function allMediaOnePhotographerFunction() {
     // Récupère les datas des photographes, photographer et media
     const allData = await getData();
     //  Récupère les photos du photographe dont la page est affichée
     const allMediaOnePhotographer = 
         allData.media.filter(e => e.photographerId == idOnePhotographer)
-    // Tri par titre (title), popularité (likes), date(date)
-    // création de 3 tableaux reprenant ces jeux de données
-    let arrayCompareTitle = []
-    let arrayCompareLikes = []
-    let arrayCompareDate = []
-    
+    const tableauResultats = [allData, allMediaOnePhotographer]
+    return tableauResultats
+}
 
-    allMediaOnePhotographer.forEach((e) => {
-        arrayCompareTitle.push(e.title)
-        arrayCompareLikes.push(e.likes)
-        arrayCompareDate.push(e.date)
-        // tableauLikesApresTri.push('')
-    })
-     
-    // Tri des titres par ordre alphabétique, tri des likes par ordre croissant, tri des dates par ancienneté
-    arrayCompareTitle.sort()
-    arrayCompareLikes.sort(function(a, b) {
-        return a - b;
-      })
-    arrayCompareDate.sort()
-    // seuls les tris par popularité (likes) et date (dates) sont exigés - cf notes de réunion : maquette pas à jour
-    // Création d'une nouvelle fonction pour trier directement par likes croissant
-    //  un tableau duplicata de allMediaOnePhotographer
-    // attention reference type donc duplicata de chaque valeur et non de chaque pointeur
-    let sortedByLikesAllMediaOnePhotographer = []
-    let sortedByDatesAllMediaOnePhotographer = []
-    allMediaOnePhotographer.forEach(element => {
-        sortedByLikesAllMediaOnePhotographer.push(element)
-        sortedByDatesAllMediaOnePhotographer.push(element)
-    });
+async function lightboxFunction(allMediaOnePhotographer) {
 
-    const declencheurTriLikes = document.querySelector('#tri-likes')
-    sortedByLikesAllMediaOnePhotographer.sort(function(a, b) {
-        return b.likes - a.likes;
-      })
-    
-    declencheurTriLikes.addEventListener('click', () => {
-        const allArticles = document.querySelectorAll('article')
-        allArticles.forEach(e => e.style.display = 'none')
-        displayPhotos(sortedByLikesAllMediaOnePhotographer)
-    })
-
-    const declencheurTriDate = document.querySelector('#tri-dates')
-    sortedByDatesAllMediaOnePhotographer.sort(function(a,b) {
-        return b.date < a.date ? 1 : -1 ;
-    }) 
- 
-    declencheurTriDate.addEventListener('click', () => {
-        const allArticles = document.querySelectorAll('article')
-        allArticles.forEach(e => e.style.display = 'none')
-        displayPhotos(sortedByDatesAllMediaOnePhotographer)
-    })
-
-    // affichage des possibilités de tri au clic sur le bouton 'popularité'
-
-    declencheurTriLikes.addEventListener('mouseover', () => {
-        declencheurTriDate.style.display = 'block'
-    })
-    
-    // CETTE VERSION NE PERMET PAS DE GERER LES EXCEPTIONS DEGALITE ET DONC RENVOIE UN TABLEAU TROP GRAND
-    // declencheurTriLikes.addEventListener('click', () => {
-    //     for (let indi = 0; indi < arrayCompareLikes.length; indi ++) {
-    //         console.log(indi);
-    //         allMediaOnePhotographer.forEach( (e) => {
-    //             if (e.likes == arrayCompareLikes[indi]) {
-    //                 tableauLikesApresTri.push(e)
-    //                 console.log(e.likes)
-    //                 console.log(arrayCompareLikes[indi])
-    //                 console.log(tableauLikesApresTri);
-    //             } else {
-    //                 console.log(e.likes)
-    //                 console.log(arrayCompareLikes[indi])
-    //                 console.log(tableauLikesApresTri);
-    //             }
-    //         })
-    //     }
-    // })
-    // CETTE VERSION NE PERMET PAS DE GERER LES EXCEPTIONS DEGALITE ET DONC RENVOIE UN TABLEAU TROP GRAND
-  
-    // Affiche les photos
-    displayPhotos(allMediaOnePhotographer)
     // Créer la lightbox - récupérer src, implémenter un indice, récupérer le titre
-    
     let arrayRefSrc = []
     let arrayIndex = []
     let arrayTitle = []
     let refSrc = ''
     let index = 0
     let title = ''
+    // displayPhotos(allMediaOnePhotographer)
     // alt vaut title, pas besoin de le déclarer 
     allMediaOnePhotographer.forEach((dataOneArtwork) => {
         const { id, photographerId, title, image, video, likes, date, price } = dataOneArtwork
@@ -149,26 +73,10 @@ async function init() {
             index ++
         }
     })
-
-    // affichage des boutons de tri
-
-    
-    
     // affichage d'une image cliquée dans la lightbox
     const photosAffichees = document.querySelectorAll(".photoAffichee, .videoAffichee")
     const lightboxContainerVideo = document.createElement('video')
     const lightboxContainerVideoSource = document.createElement('source')
-    // tentative résolution bug affichage vidéo
-    // let sourceVideo = ''
-    // photosAffichees.forEach( 
-    //     (uneSeulePhoto,indexUneSeulePhoto) => {
-    //         if (uneSeulePhoto.classList.contains('videoAffichee')) {
-    //             sourceVideo = arrayRefSrc[indexUneSeulePhoto]
-    //         } } 
-    //     )
-    // lightboxContainerVideoSource.setAttribute('src',sourceVideo)
-    // lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
-
     photosAffichees.forEach( 
         (uneSeulePhoto,indexUneSeulePhoto) => {
             uneSeulePhoto.addEventListener("click", () => {
@@ -307,11 +215,7 @@ async function init() {
             const flecheSuivant = document.querySelector('.lightbox__next')
             flecheSuivant.addEventListener('click', () => {
                 if (indexPhoto == nombrePhotos - 1) {
-                    // cas : passer d'une vidéo à une image suivante
-                    // if (uneSeulePhoto.classList.contains('videoAffichee')) {
-                    //     lightboxContainerVideo.style.display = 'none'
-                    //     lightboxContainerImg.style.display = 'block'                        
-                    //     }
+                    // cas : passer d'une vidéo à une image suivante                    
                     indexPhoto = 0
                     //cas : passer d'une image à une vidéo suivante en fin de liste
                     if (photosAffichees[indexPhoto].classList.contains('videoAffichee')) {
@@ -386,24 +290,103 @@ async function init() {
             })
         }
     )
+}
 
+async function headerFunction(allMediaOnePhotographer, allData) {
+    // Créer la lightbox - récupérer src, implémenter un indice, récupérer le titre
+    let arrayRefSrc = []
+    let arrayIndex = []
+    let arrayTitle = []
+    let refSrc = ''
+    let index = 0
+    let title = ''
+    // alt vaut title, pas besoin de le déclarer 
+    allMediaOnePhotographer.forEach((dataOneArtwork) => {
+        const { id, photographerId, title, image, video, likes, date, price } = dataOneArtwork
+        // distinction entre image et vidéo        
+        if (dataOneArtwork.image) {
+            refSrc = `assets/images/${photographerId}/${image}`
+            arrayRefSrc.push(refSrc)
+            arrayIndex.push(index)
+            arrayTitle.push(title)
+            index ++
+        } else {
+            refSrc = `assets/images/${photographerId}/${video}`
+            arrayRefSrc.push(refSrc)
+            arrayIndex.push(index)
+            arrayTitle.push(title)
+            index ++
+        }
+    })
+    // const fixedBanner = document.createElement('div')
+    // const likesFixedBanner = document.createElement('div')
+    // const priceFixedBanner = document.createElement('div')
+    // fixedBanner.setAttribute('class','likesAndPriceBanner')
+    const photographerData = allData.photographers.filter(e=>e.id==idOnePhotographer)[0]
+    const photographerPrice = photographerData.price
+    // Affiche l'entête 
+    const photographHeader = document.querySelector('.photograph-header')    
+    const photographerNameAndCity = document.createElement('div')
+    photographerNameAndCity.setAttribute('class','photographerNameAndCity')
+    const photographerName = document.createElement('h1')
+    photographerName.setAttribute('class','photographerName')
+    photographerName.textContent = `${photographerData.name}`
+    const photographerCity = document.createElement('p')
+    photographerCity.setAttribute('class', 'photographerCity')    
+    photographerCity.textContent = `${photographerData.city}, ${photographerData.country.toUpperCase()}`
+    const photographerQuote = document.createElement('p')
+    photographerQuote.setAttribute('class','quoting')
+    photographerQuote.textContent = `${photographerData.tagline}`
+    const photographerPictureDiv = document.createElement('div')
+    photographerPictureDiv.setAttribute('id','photographerPicture')
+    const photographerPicture = document.createElement('img')
+    photographerPicture.setAttribute('class','photographerPicture')
+    photographerPicture.setAttribute('src',`assets/photographers/${photographerData.portrait}`)
+    photographerPicture.setAttribute('alt',`${photographerData.name}`)
+    photographHeader.appendChild(photographerNameAndCity)
+    photographerNameAndCity.appendChild(photographerName)
+    photographerNameAndCity.appendChild(photographerCity)
+    photographerNameAndCity.appendChild(photographerQuote)
+    photographHeader.appendChild(photographerPictureDiv)
+    photographerPictureDiv.appendChild(photographerPicture)
+    // écoute d'événement : ouverture de la modale avec nom photographe
+    const boutonModale = document.querySelector('.contact_button')
+    // boutonModale.addEventListener('click', displayModal(`${photographerData.name}`))
+}
 
-    // document.querySelector("div.photograph-photos article img").addEventListener(
-    //     "onclick", (e) => 
-    // )
-
-    // allMediaOnePhotographer.forEach((element,index) => {
-    //     const { id, photographerId, title, image, video, likes, date, price } = dataOneArtwork
-    //     const srcImage = `assets/images/${photographerId}/${image}`
-    //     const srcVideo = `assets/images/${photographerId}/${video}`
-    //     arrayIndexSrcTitle.push(allMediaOnePhotographer)
-
-    // })
+async function likesFunction(allMediaOnePhotographer, allData) {
+    // Créer la lightbox - récupérer src, implémenter un indice, récupérer le titre
+    let arrayRefSrc = []
+    let arrayIndex = []
+    let arrayTitle = []
+    let refSrc = ''
+    let index = 0
+    let title = ''
+    // alt vaut title, pas besoin de le déclarer 
+    allMediaOnePhotographer.forEach((dataOneArtwork) => {
+        const { id, photographerId, title, image, video, likes, date, price } = dataOneArtwork
+        // distinction entre image et vidéo        
+        if (dataOneArtwork.image) {
+            refSrc = `assets/images/${photographerId}/${image}`
+            arrayRefSrc.push(refSrc)
+            arrayIndex.push(index)
+            arrayTitle.push(title)
+            index ++
+        } else {
+            refSrc = `assets/images/${photographerId}/${video}`
+            arrayRefSrc.push(refSrc)
+            arrayIndex.push(index)
+            arrayTitle.push(title)
+            index ++
+        }
+    })
+    
     // Affiche la bannière fixe avec les prix et les likes
     const fixedBanner = document.createElement('div')
     const likesFixedBanner = document.createElement('div')
     const priceFixedBanner = document.createElement('div')
     fixedBanner.setAttribute('class','likesAndPriceBanner')
+    console.log('alldata',allData);
     const photographerData = allData.photographers.filter(e=>e.id==idOnePhotographer)[0]
     const photographerPrice = photographerData.price
     // initialisation du nombre de likes puis calcul du nombre de likes par itération des oeuvres du photographe
@@ -443,43 +426,95 @@ async function init() {
             }
         })
     })
-
-    // Affiche l'entête 
-    const photographHeader = document.querySelector('.photograph-header')    
-    const photographerNameAndCity = document.createElement('div')
-    photographerNameAndCity.setAttribute('class','photographerNameAndCity')
-    const photographerName = document.createElement('h1')
-    photographerName.setAttribute('class','photographerName')
-    photographerName.textContent = `${photographerData.name}`
-    const photographerCity = document.createElement('p')
-    photographerCity.setAttribute('class', 'photographerCity')    
-    photographerCity.textContent = `${photographerData.city}, ${photographerData.country.toUpperCase()}`
-    const photographerQuote = document.createElement('p')
-    photographerQuote.setAttribute('class','quoting')
-    photographerQuote.textContent = `${photographerData.tagline}`
-    const photographerPictureDiv = document.createElement('div')
-    photographerPictureDiv.setAttribute('id','photographerPicture')
-    const photographerPicture = document.createElement('img')
-    photographerPicture.setAttribute('class','photographerPicture')
-    photographerPicture.setAttribute('src',`assets/photographers/${photographerData.portrait}`)
-    photographerPicture.setAttribute('alt',`${photographerData.name}`)
-    photographHeader.appendChild(photographerNameAndCity)
-    photographerNameAndCity.appendChild(photographerName)
-    photographerNameAndCity.appendChild(photographerCity)
-    photographerNameAndCity.appendChild(photographerQuote)
-    photographHeader.appendChild(photographerPictureDiv)
-    photographerPictureDiv.appendChild(photographerPicture)
-    // écoute d'événement : ouverture de la modale avec nom photographe
-    const boutonModale = document.querySelector('.contact_button')
-    boutonModale.addEventListener('click',displayModal(`${photographerData.name}`))
-
-
-    // 
-
 }
 
-init();
+function deleteArticles() {
+    const parentSection = document.querySelector('.photograph-photos')
+    const allArticles = document.querySelectorAll('article')
+    allArticles.forEach(e => parentSection.removeChild(e))
+}
 
+async function sortsFunction(allMediaOnePhotographer) {
+    // Tri par titre (title), popularité (likes), date(date)
+    // création de 3 tableaux reprenant ces jeux de données
+    let arrayCompareTitle = []
+    let arrayCompareLikes = []
+    let arrayCompareDate = []
+    
+
+    allMediaOnePhotographer.forEach((e) => {
+        arrayCompareTitle.push(e.title)
+        arrayCompareLikes.push(e.likes)
+        arrayCompareDate.push(e.date)
+        // tableauLikesApresTri.push('')
+    })
+        
+    // Tri des titres par ordre alphabétique, tri des likes par ordre croissant, tri des dates par ancienneté
+    arrayCompareTitle.sort()
+    arrayCompareLikes.sort(function(a, b) {
+        return a - b;
+        })
+    arrayCompareDate.sort()
+    // Création d'une nouvelle fonction pour trier directement par likes croissant
+    //  un tableau duplicata de allMediaOnePhotographer
+    // attention reference type donc duplicata de chaque valeur et non de chaque pointeur
+    let sortedByLikesAllMediaOnePhotographer = []
+    let sortedByDatesAllMediaOnePhotographer = []
+    allMediaOnePhotographer.forEach(element => {
+        sortedByLikesAllMediaOnePhotographer.push(element)
+        sortedByDatesAllMediaOnePhotographer.push(element)
+    });
+
+    // écoute d'événement pour tri par popularité
+    const declencheurTriLikes = document.querySelector('#tri-likes')
+    sortedByLikesAllMediaOnePhotographer.sort(function(a, b) {
+        return b.likes - a.likes;
+        })
+    
+    declencheurTriLikes.addEventListener('click', () => {
+        deleteArticles()
+        displayPhotos(sortedByLikesAllMediaOnePhotographer)
+        lightboxFunction(sortedByLikesAllMediaOnePhotographer)
+        likesFunction(sortedByLikesAllMediaOnePhotographer, alld)
+    })
+
+    // écoute d'événement pour tri par date
+    const declencheurTriDate = document.querySelector('#tri-dates')
+    sortedByDatesAllMediaOnePhotographer.sort(function(a,b) {
+        return b.date < a.date ? 1 : -1 ;
+    }) 
+    
+    declencheurTriDate.addEventListener('click', () => {
+        deleteArticles()
+        displayPhotos(sortedByLikesAllMediaOnePhotographer)
+        lightboxFunction(sortedByLikesAllMediaOnePhotographer)
+        likesFunction(sortedByLikesAllMediaOnePhotographer, alld)
+    })
+
+    // affichage des possibilités de tri au clic sur le bouton 'popularité'
+    declencheurTriLikes.addEventListener('mouseover', () => {
+        declencheurTriDate.style.display = 'block'
+    })
+}
+
+let alld =''
+
+async function init() {
+    let donnees = await allMediaOnePhotographerFunction()
+    alld = donnees[0]
+    const allm = donnees[1]
+    headerFunction(allm,alld)
+    displayPhotos(allm)
+    lightboxFunction(allm)
+    likesFunction(allm,alld)
+    sortsFunction(allm)
+}
+
+init()
+
+
+const divModale = document.querySelector('#contact_modal')
+divModale.style.display = 'none'
 // fermeture de la lightbox au clic sur la croix et réinitialisation image et vidéo
 
 const croixDeFermeture = document.querySelector(".lightbox__close")
@@ -487,47 +522,3 @@ croixDeFermeture.addEventListener('click', () => {
     document.querySelector('#lightbox').style.display = 'none'
     })
 
-// async function displayData(photos) {
-//     const photosSection = document.querySelector(".photograph-photos");
-
-//     photos.forEach((photo) => {
-//         const photoModel = photoFactory(photos);
-//         const photoCardDOM = photoModel.getPhotoCardDOM();
-//         photosSection.appendChild(photoCardDOM);
-//     });
-// };
-
-// function photoFactory(photos) {
-//     // photos est le tableau contenant la partie .media de data.json ET triée selon ID de photograph de la page HTML
-//     let imageType = false;
-//     let videoType = false;
-//     if (photos.image) {
-//         const { date, id, image, likes, photographerId, price, title } = photos;
-//         imageType = true;
-//     } else {
-//         const { date, id, likes, photographerId, price, title, video } = photos;
-//         videoType = true;
-//     };
-
-//     console.log(imageType,videoType)
-    
-//     function getPhotoCardDOM() {
-//         const article = document.createElement( 'article' );
-//         const img = document.createElement( 'img' );
-//         img.setAttribute("src", `/assets/images/${id})`);
-//         img.setAttribute("alt", `artwork entitled ${title}`);
-//         const h3 = document.createElement('h3');
-//         h3.textContent = title;
-//         const link = document.createElement('a');
-//         link.setAttribute("href", `#`);
-//         link.setAttribute("alt", `${title}, close-up view`);
-//         const h4 = document.createElement( 'h4' );
-//         h4.textContent = `${likes}` 
-//         article.appendChild(link);
-//         link.appendChild(img);
-//         article.appendChild(h3);
-//         article.appendChild(h4);
-//         return (article);
-//     }
-//     return {getPhotoCardDOM }
-// }
