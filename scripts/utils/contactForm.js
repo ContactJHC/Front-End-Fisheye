@@ -1,26 +1,47 @@
 const modal = document.getElementById("contact_modal")
 const mainHTML = document.getElementById('main')
 const modalCloseBtn = document.querySelector('#modalCloseBtn')
-const boutonEnvoi = document.querySelector('.contact_button')
+const boutonEnvoi = document.querySelector('#boutonFin')
+const divModale = document.querySelector('#contact_modal')
+const boutonContact = document.querySelector('#boutonContact')
 
-function displayModal(nomPhotographe) {
-  // affichage de la modale
-  modal.style.display = "block";
-  // masquage de la page html en terme d'accessibilité lorsque la modale est ouverte
-  // affichage de la modale - accessibilité
-  mainHTML.setAttribute('aria-hidden', 'true')
-  modal.setAttribute('aria-hidden','false')
-  modal.setAttribute('role','dialog')
+function constructionHeaderModal(nomPhotographe) {
   const parentNode = document.querySelector('.modal')
   const formModal = document.querySelector('#formulaire')
   const underHeader = document.createElement('div')
   underHeader.setAttribute('id','underHeader')
   underHeader.textContent = nomPhotographe
   parentNode.insertBefore(underHeader,formModal)
+}
+
+function displayModal() {
+  // affichage de la modale
+  console.log('clic effectif sur bouton CONTACTEZ MOI');
+  modal.style.display = "block";
+  // masquage de la page html en terme d'accessibilité lorsque la modale est ouverte
+  // affichage de la modale - accessibilité
+  mainHTML.setAttribute('aria-hidden', 'true')
+  modal.setAttribute('aria-hidden','false')
+  modal.setAttribute('role','dialog')
   // focus sur le bouton de fermeture de la modale
   modalCloseBtn.focus()
+  modalCloseBtn.setAttribute('tabindex','0')
   mainHTML.classList.add('no-scroll')
+
+ 
 }
+
+// écoute d'événement : ouverture de la modale avec nom photographe
+const boutonModale = document.querySelector('#boutonContact')
+boutonModale.addEventListener('click', displayModal)
+
+// ouverture de la modale à l'appui sur 'Entrée'
+boutonContact.addEventListener('keyup', (e) => {
+  if (e.key === 'Enter') {
+    console.log('touche entrée entendue');
+    displayModal()
+  }
+})
 
 function closeModal() {
     mainHTML.classList.remove('no-scroll')
@@ -35,13 +56,16 @@ function closeModal() {
 
 }
 
-// fermeture de la modale à l'appui sur la touche Echap
 
-modal.addEventListener('keydown', (e) => {
+// fermeture de la modale à l'appui sur la touche Echap
+modal.addEventListener('keyup', (e) => {
   if (e.key === 'Escape') {
     closeModal()
   }
 })
+
+//  fermeture de la modale au clic sur la croix de fermeture 
+modalCloseBtn.addEventListener('click', closeModal)
 
 // // // Vérification de la validité du prénom renseigné 
 
@@ -130,7 +154,7 @@ const outputData = {
 
 function validate() {
     
-    let resultat = verifEmail() && verifMessage() && verifPrenom() && verifNom()
+    let resultat = verifPrenom() && verifNom() && verifEmail() && verifMessage()  
     if (resultat) {
         let outputData = {
           'prénom': prenom.value,
@@ -142,7 +166,11 @@ function validate() {
         closeModal()
         
     } else {
-        return false
+      spanPrenom.style.display = "block";
+      spanNom.style.display = "block";
+      spanEmail.style.display = "block";
+      spanMessage.style.display = "block";
+      return false
     }
     return false
 }

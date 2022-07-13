@@ -348,10 +348,7 @@ async function headerFunction(allMediaOnePhotographer, allData) {
     photographerNameAndCity.appendChild(photographerCity)
     photographerNameAndCity.appendChild(photographerQuote)
     photographHeader.appendChild(photographerPictureDiv)
-    photographerPictureDiv.appendChild(photographerPicture)
-    // écoute d'événement : ouverture de la modale avec nom photographe
-    const boutonModale = document.querySelector('.contact_button')
-    // boutonModale.addEventListener('click', displayModal(`${photographerData.name}`))
+    photographerPictureDiv.appendChild(photographerPicture)   
 }
 
 async function likesFunction(allMediaOnePhotographer, allData) {
@@ -514,11 +511,14 @@ async function sortsFunction(allMediaOnePhotographer) {
 }
 
 let alld =''
-
+let nomDuPhotographe = ''
 async function init() {
     let donnees = await allMediaOnePhotographerFunction()
     alld = donnees[0]
     const allm = donnees[1]
+    const phoData = alld.photographers.filter(e=>e.id==idOnePhotographer)[0]
+    nomDuPhotographe = phoData.name
+    constructionHeaderModal(nomDuPhotographe)
     headerFunction(allm,alld)
     displayPhotos(allm)
     lightboxFunction(allm)
@@ -529,10 +529,8 @@ async function init() {
 init()
 
 
-const divModale = document.querySelector('#contact_modal')
-divModale.style.display = 'none'
-// fermeture de la lightbox au clic sur la croix et réinitialisation image et vidéo
 
+// fermeture de la lightbox au clic sur la croix et réinitialisation image et vidéo
 const croixDeFermeture = document.querySelector(".lightbox__close")
 croixDeFermeture.addEventListener('click', () => {
     document.querySelector('#lightbox').style.display = 'none'
