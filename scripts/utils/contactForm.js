@@ -66,7 +66,7 @@ modal.addEventListener('keyup', (e) => {
 //      au clic sur la croix de fermeture 
 modalCloseBtn.addEventListener('click', closeModal)
 //      en appuyant sur entrée lorsque la sélection au clavier est sur la croix de fermeture
-modalCloseBtn.addEventListener('keyup', (e) => {
+modalCloseBtn.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
     closeModal()
   }
