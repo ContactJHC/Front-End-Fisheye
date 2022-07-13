@@ -77,11 +77,387 @@ async function lightboxFunction(allMediaOnePhotographer) {
     const photosAffichees = document.querySelectorAll(".photoAffichee, .videoAffichee")
     const lightboxContainerVideo = document.createElement('video')
     const lightboxContainerVideoSource = document.createElement('source')
-    photosAffichees.forEach( 
-        (uneSeulePhoto,indexUneSeulePhoto) => {
-            uneSeulePhoto.addEventListener("click", () => {
+    photosAffichees.forEach((uneSeulePhoto,indexUneSeulePhoto) => {
+        uneSeulePhoto.addEventListener("click", () => {
+// affichage du titre pour image et pour vidéo 
+        let titreDeLaPhoto = document.querySelector('div.lightbox__title')
+        let indexPhoto = indexUneSeulePhoto
+        titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
 
-    // affichage du titre pour image et pour vidéo 
+// affichage photo et vidéo                
+        const LAlightbox = document.querySelector('#lightbox')
+        LAlightbox.style.display = 'block'
+        const lightboxContainer = document.querySelector('.lightbox__container')
+        const lightboxContainerImg = document.querySelector('div.lightbox__container img')
+        const croixDeFermeture = document.querySelector(".lightbox__close")
+        LAlightbox.setAttribute('tabindex','0')
+        LAlightbox.focus()
+
+        
+        if (uneSeulePhoto.classList.contains('videoAffichee')) {
+            let sourceVideo = arrayRefSrc[indexPhoto]
+            lightboxContainerImg.style.display = 'none'
+            lightboxContainerImg.setAttribute('aria-hidden', 'true')
+            lightboxContainerVideo.style.display = 'block'
+            lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+    // Création de l'élément complet de lecture vidéo - en cas de premier clic sur vidéo
+            lightboxContainerVideo.setAttribute('class', 'htmlVideo')
+            lightboxContainerVideo.setAttribute('controls', '')
+            lightboxContainerVideoSource.setAttribute('src', sourceVideo)
+            lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
+            lightboxContainerVideoSource.setAttribute('alt', arrayTitle[indexPhoto])
+            lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
+            lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
+    // fermeture de la lightbox au clic pour empêcher l'empilement de vidéos consécutives
+            croixDeFermeture.addEventListener('click', () => {
+                LAlightbox.style.display = 'none'
+                lightboxContainerVideo.style.display = 'none'
+                lightboxContainerVideo.setAttribute('aria-hidden', 'true')
+            })
+                        
+        } else {
+
+    // changement attributs de l'élément img HTML - en cas de premier clic sur image
+            lightboxContainerImg.style.display = 'block'
+            let sourcePhoto = uneSeulePhoto.getAttribute('src')
+            lightboxContainerImg.setAttribute('src', sourcePhoto)
+            lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+            lightboxContainerVideo.setAttribute('aria-hidden', 'true')
+            lightboxContainerImg.setAttribute('aria-hidden', 'false')
+
+        }            
+
+                // navigations photos de gauche au clic sur la flèche 'précédent'
+        const flechePrecedent = document.querySelector('.lightbox__prev')        
+        const nombrePhotos = photosAffichees.length
+        flechePrecedent.addEventListener("click", () => {
+            if (indexPhoto == 0) {
+                // lightboxContainerVideo.style.display = 'none'
+                indexPhoto = nombrePhotos - 1
+        // cas : passer d'une image à une vidéo précédente en début de liste
+                if (photosAffichees[indexPhoto].classList.contains('videoAffichee')) {
+                    lightboxContainerVideo.style.display = 'block'
+                    lightboxContainerImg.setAttribute('aria-hidden', 'true')
+                    lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                    lightboxContainerImg.style.display = 'none'
+                    let sourceVideo = arrayRefSrc[indexPhoto]
+                    lightboxContainerVideo.setAttribute('class', 'htmlVideo')
+                    lightboxContainerVideo.setAttribute('controls', '')
+                    lightboxContainerVideoSource.setAttribute('src', sourceVideo)
+                    lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
+                    lightboxContainerVideoSource.setAttribute('alt', arrayTitle[indexPhoto])
+                    lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
+                    lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
+            // fermeture de la lightbox au clic pour empêcher l'empilement consécutif de vidéos 
+                    croixDeFermeture.addEventListener('click', () => {
+                        LAlightbox.style.display = 'none'
+                        lightboxContainerVideo.style.display = 'none'
+                        lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                    })
+                    titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+    // cas : passer d'une image à une image précente en début de liste
+                } else {
+                    let sourcePhoto = arrayRefSrc[indexPhoto]
+                    lightboxContainerImg.style.display = 'block'
+                    lightboxContainerVideo.setAttribute('aria-hidden', 'true')
+                    lightboxContainerImg.setAttribute('aria-hidden', 'false')
+
+                    lightboxContainerVideo.style.display = 'none'
+                    lightboxContainerImg.setAttribute('src', sourcePhoto)
+                    lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                    titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                }
+
+            } else { 
+                // cas : passer d'une vidéo à une image 
+                if (uneSeulePhoto.classList.contains('videoAffichee')) {
+                    lightboxContainerVideo.style.display = 'none'
+                    lightboxContainerImg.style.display = 'block' 
+                    lightboxContainerImg.setAttribute('aria-hidden', 'false')
+                    lightboxContainerVideo.setAttribute('aria-hidden', 'true')
+
+
+                    }
+                indexPhoto = indexPhoto - 1 
+                // cas : passer d'une image à une vidéo précédente qqs indice non nul
+                if (photosAffichees[indexPhoto].classList.contains('videoAffichee')) {
+                    let sourceVideo = arrayRefSrc[indexPhoto]
+                    lightboxContainerImg.style.display = 'none'
+                    lightboxContainerImg.setAttribute('aria-hidden', 'true')
+                    lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                    lightboxContainerVideo.style.display = 'block'
+                    lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                    lightboxContainerVideoSource.setAttribute('src', sourceVideo)
+                    lightboxContainerVideoSource.setAttribute('type', 'video/mp4')                        
+                    lightboxContainerVideo.setAttribute('class', 'htmlVideo')
+                    lightboxContainerVideo.setAttribute('controls', '')
+                    lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
+                    lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
+            // fermeture de la lightbox au clic pour empêcher l'empilement consécutif de vidéos 
+                    croixDeFermeture.addEventListener('click', () => {
+                        LAlightbox.style.display = 'none'
+                        lightboxContainerVideo.style.display = 'none'
+                        lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                    })
+                    titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                //cas : passer d'une image à une image précédente qqs indice non nul
+                } else {
+                    let sourcePhoto = arrayRefSrc[indexPhoto]
+                    lightboxContainerImg.style.display = 'block'
+                    lightboxContainerVideo.style.display = 'none'
+                    lightboxContainerVideo.setAttribute('aria-hidden', 'true')
+                    lightboxContainerImg.setAttribute('aria-hidden', 'false')
+                    lightboxContainerImg.setAttribute('src', sourcePhoto)
+                    lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                    titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                }
+        }})
+        // navigation photos de gauche en appuyant sur la flèche de gauche du clavier
+        LAlightbox.addEventListener('keyup', (e) => {
+            if (e.key === 'ArrowLeft') {
+                console.log('entrée entendue');
+                if (indexPhoto == 0) {
+                    // lightboxContainerVideo.style.display = 'none'
+                    indexPhoto = nombrePhotos - 1
+            // cas : passer d'une image à une vidéo précédente en début de liste
+                    if (photosAffichees[indexPhoto].classList.contains('videoAffichee')) {
+                        lightboxContainerVideo.style.display = 'block'
+                        lightboxContainerImg.setAttribute('aria-hidden', 'true')
+                        lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                        lightboxContainerImg.style.display = 'none'
+                        let sourceVideo = arrayRefSrc[indexPhoto]
+                        lightboxContainerVideo.setAttribute('class', 'htmlVideo')
+                        lightboxContainerVideo.setAttribute('controls', '')
+                        lightboxContainerVideoSource.setAttribute('src', sourceVideo)
+                        lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
+                        lightboxContainerVideoSource.setAttribute('alt', arrayTitle[indexPhoto])
+                        lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
+                        lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
+                // fermeture de la lightbox au clic pour empêcher l'empilement consécutif de vidéos 
+                        croixDeFermeture.addEventListener('click', () => {
+                            LAlightbox.style.display = 'none'
+                            lightboxContainerVideo.style.display = 'none'
+                            lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                        })
+                        titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+        // cas : passer d'une image à une image précente en début de liste
+                    } else {
+                        let sourcePhoto = arrayRefSrc[indexPhoto]
+                        lightboxContainerImg.style.display = 'block'
+                        lightboxContainerVideo.setAttribute('aria-hidden', 'true')
+                        lightboxContainerImg.setAttribute('aria-hidden', 'false')
+
+                        lightboxContainerVideo.style.display = 'none'
+                        lightboxContainerImg.setAttribute('src', sourcePhoto)
+                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                        titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                    }
+
+                } else { 
+                    // cas : passer d'une vidéo à une image 
+                    if (uneSeulePhoto.classList.contains('videoAffichee')) {
+                        lightboxContainerVideo.style.display = 'none'
+                        lightboxContainerImg.style.display = 'block' 
+                        lightboxContainerImg.setAttribute('aria-hidden', 'false')
+                        lightboxContainerVideo.setAttribute('aria-hidden', 'true')
+
+
+                        }
+                    indexPhoto = indexPhoto - 1 
+                    // cas : passer d'une image à une vidéo précédente qqs indice non nul
+                    if (photosAffichees[indexPhoto].classList.contains('videoAffichee')) {
+                        let sourceVideo = arrayRefSrc[indexPhoto]
+                        lightboxContainerImg.style.display = 'none'
+                        lightboxContainerImg.setAttribute('aria-hidden', 'true')
+                        lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                        lightboxContainerVideo.style.display = 'block'
+                        lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                        lightboxContainerVideoSource.setAttribute('src', sourceVideo)
+                        lightboxContainerVideoSource.setAttribute('type', 'video/mp4')                        
+                        lightboxContainerVideo.setAttribute('class', 'htmlVideo')
+                        lightboxContainerVideo.setAttribute('controls', '')
+                        lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
+                        lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
+                // fermeture de la lightbox au clic pour empêcher l'empilement consécutif de vidéos 
+                        croixDeFermeture.addEventListener('click', () => {
+                            LAlightbox.style.display = 'none'
+                            lightboxContainerVideo.style.display = 'none'
+                            lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                        })
+                        titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                    //cas : passer d'une image à une image précédente qqs indice non nul
+                    } else {
+                        let sourcePhoto = arrayRefSrc[indexPhoto]
+                        lightboxContainerImg.style.display = 'block'
+                        lightboxContainerVideo.style.display = 'none'
+                        lightboxContainerVideo.setAttribute('aria-hidden', 'true')
+                        lightboxContainerImg.setAttribute('aria-hidden', 'false')
+                        lightboxContainerImg.setAttribute('src', sourcePhoto)
+                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                        titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                    }
+                }
+            }
+        })
+    // navigations photos de droite au clic sur la flèche 'suivant'
+        const flecheSuivant = document.querySelector('.lightbox__next')
+        flecheSuivant.addEventListener('click', () => {
+            if (indexPhoto == nombrePhotos - 1) {
+                // cas : passer d'une vidéo à une image suivante                    
+                indexPhoto = 0
+                //cas : passer d'une image à une vidéo suivante en fin de liste
+                if (photosAffichees[indexPhoto].classList.contains('videoAffichee')) {
+                    let sourceVideo = arrayRefSrc[indexPhoto]
+                    lightboxContainerImg.style.display = 'none'
+                    lightboxContainerVideo.style.display = 'block'
+                    lightboxContainerImg.setAttribute('aria-hidden', 'true')
+                    lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                    lightboxContainerVideo.setAttribute('class', 'htmlVideo')
+                    lightboxContainerVideo.setAttribute('controls', '')
+                    lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                    lightboxContainerVideoSource.setAttribute('src', sourceVideo)
+                    lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
+                    lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
+                    lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
+                    titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                    croixDeFermeture.addEventListener('click', () => {
+                        LAlightbox.style.display = 'none'
+                        lightboxContainerVideo.style.display = 'none'
+                        lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                    })
+                } else {
+                    // cas : passer d'une image à une image suivante en fin de liste
+                    let sourcePhoto = arrayRefSrc[indexPhoto]
+                    lightboxContainerImg.style.display = 'block'
+                    lightboxContainerVideo.style.display = 'none'
+                    lightboxContainerImg.setAttribute('aria-hidden', 'false')
+                    lightboxContainerVideo.setAttribute('aria-hidden', 'true')
+                    lightboxContainerImg.setAttribute('src', sourcePhoto)
+                    lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                    titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                }
+            } else {
+                // cas : passer d'une vidéo à une image suivante en toute autre indice de la liste
+                if (uneSeulePhoto.classList.contains('videoAffichee')) {
+                    lightboxContainerVideo.style.display = 'none'
+                    lightboxContainerImg.style.display = 'block'                        
+                    }
+                indexPhoto = indexPhoto + 1
+                //cas : passer d'une image à une vidéo suivante quel que soit indice non final de la liste
+                if (photosAffichees[indexPhoto].classList.contains('videoAffichee')) {
+                    let sourceVideo = arrayRefSrc[indexPhoto]
+                    lightboxContainerImg.style.display = 'none'
+                    lightboxContainerVideo.style.display = 'block'
+                    lightboxContainerImg.setAttribute('aria-hidden', 'true')
+                    lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                    lightboxContainerVideo.setAttribute('class', 'htmlVideo')
+                    lightboxContainerVideo.setAttribute('controls', '')
+                    lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                    lightboxContainerVideoSource.setAttribute('src', sourceVideo)
+                    lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
+                    lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
+                    lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
+                    titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                    croixDeFermeture.addEventListener('click', () => {
+                        LAlightbox.style.display = 'none'
+                        lightboxContainerVideo.style.display = 'none'
+                        lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                    })
+                //cas : passer d'une image à une image suivante quel que soit indice non final de la liste 
+                } else {
+                    let sourcePhoto = arrayRefSrc[indexPhoto]
+                    lightboxContainerImg.style.display = 'block'
+                    lightboxContainerVideo.style.display = 'none'
+                    lightboxContainerImg.setAttribute('aria-hidden', 'false')
+                    lightboxContainerVideo.setAttribute('aria-hidden', 'true')
+                    lightboxContainerImg.setAttribute('src', sourcePhoto)
+                    lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                    titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                }
+            }})
+    // navigations photos de droite en appuyant sur la flèche de droite du clavier
+        LAlightbox.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                console.log('entréeDroite entendue');
+                if (indexPhoto == nombrePhotos - 1) {
+                    // cas : passer d'une vidéo à une image suivante                    
+                    indexPhoto = 0
+                    //cas : passer d'une image à une vidéo suivante en fin de liste
+                    if (photosAffichees[indexPhoto].classList.contains('videoAffichee')) {
+                        let sourceVideo = arrayRefSrc[indexPhoto]
+                        lightboxContainerImg.style.display = 'none'
+                        lightboxContainerVideo.style.display = 'block'
+                        lightboxContainerImg.setAttribute('aria-hidden', 'true')
+                        lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                        lightboxContainerVideo.setAttribute('class', 'htmlVideo')
+                        lightboxContainerVideo.setAttribute('controls', '')
+                        lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                        lightboxContainerVideoSource.setAttribute('src', sourceVideo)
+                        lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
+                        lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
+                        lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
+                        titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                        croixDeFermeture.addEventListener('click', () => {
+                            LAlightbox.style.display = 'none'
+                            lightboxContainerVideo.style.display = 'none'
+                            lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                        })
+                    } else {
+                        // cas : passer d'une image à une image suivante en fin de liste
+                        let sourcePhoto = arrayRefSrc[indexPhoto]
+                        lightboxContainerImg.style.display = 'block'
+                        lightboxContainerVideo.style.display = 'none'
+                        lightboxContainerImg.setAttribute('aria-hidden', 'false')
+                        lightboxContainerVideo.setAttribute('aria-hidden', 'true')
+                        lightboxContainerImg.setAttribute('src', sourcePhoto)
+                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                        titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                    }
+                } else {
+                    // cas : passer d'une vidéo à une image suivante en toute autre indice de la liste
+                    if (uneSeulePhoto.classList.contains('videoAffichee')) {
+                        lightboxContainerVideo.style.display = 'none'
+                        lightboxContainerImg.style.display = 'block'                        
+                        }
+                    indexPhoto = indexPhoto + 1
+                    //cas : passer d'une image à une vidéo suivante quel que soit indice non final de la liste
+                    if (photosAffichees[indexPhoto].classList.contains('videoAffichee')) {
+                        let sourceVideo = arrayRefSrc[indexPhoto]
+                        lightboxContainerImg.style.display = 'none'
+                        lightboxContainerVideo.style.display = 'block'
+                        lightboxContainerImg.setAttribute('aria-hidden', 'true')
+                        lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                        lightboxContainerVideo.setAttribute('class', 'htmlVideo')
+                        lightboxContainerVideo.setAttribute('controls', '')
+                        lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                        lightboxContainerVideoSource.setAttribute('src', sourceVideo)
+                        lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
+                        lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
+                        lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
+                        titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                        croixDeFermeture.addEventListener('click', () => {
+                            LAlightbox.style.display = 'none'
+                            lightboxContainerVideo.style.display = 'none'
+                            lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                        })
+                    //cas : passer d'une image à une image suivante quel que soit indice non final de la liste 
+                    } else {
+                        let sourcePhoto = arrayRefSrc[indexPhoto]
+                        lightboxContainerImg.style.display = 'block'
+                        lightboxContainerVideo.style.display = 'none'
+                        lightboxContainerImg.setAttribute('aria-hidden', 'false')
+                        lightboxContainerVideo.setAttribute('aria-hidden', 'true')
+                        lightboxContainerImg.setAttribute('src', sourcePhoto)
+                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                        titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                    }
+                }
+            }
+        })
+        })
+        uneSeulePhoto.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                // affichage du titre pour image et pour vidéo 
             let titreDeLaPhoto = document.querySelector('div.lightbox__title')
             let indexPhoto = indexUneSeulePhoto
             titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
@@ -92,8 +468,12 @@ async function lightboxFunction(allMediaOnePhotographer) {
             const lightboxContainer = document.querySelector('.lightbox__container')
             const lightboxContainerImg = document.querySelector('div.lightbox__container img')
             const croixDeFermeture = document.querySelector(".lightbox__close")
-                    
+            LAlightbox.setAttribute('tabindex','0')
+            LAlightbox.focus()
+
+            
             if (uneSeulePhoto.classList.contains('videoAffichee')) {
+                console.log('on se trouve dans la partie Entree vers video et celleci est reconnue par sa classe');
                 let sourceVideo = arrayRefSrc[indexPhoto]
                 lightboxContainerImg.style.display = 'none'
                 lightboxContainerImg.setAttribute('aria-hidden', 'true')
@@ -115,7 +495,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                 })
                             
             } else {
-
+                console.log('onsetrouve en entree vers image');
         // changement attributs de l'élément img HTML - en cas de premier clic sur image
                 lightboxContainerImg.style.display = 'block'
                 let sourcePhoto = uneSeulePhoto.getAttribute('src')
@@ -211,9 +591,173 @@ async function lightboxFunction(allMediaOnePhotographer) {
                         titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                     }
             }})
-        // navigations photos de droite au clic sur la flèche 'suivant'
-            const flecheSuivant = document.querySelector('.lightbox__next')
-            flecheSuivant.addEventListener('click', () => {
+            // navigation photos de gauche en appuyant sur la flèche de gauche du clavier
+            LAlightbox.addEventListener('keyup', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    console.log('entrée entendue');
+                    if (indexPhoto == 0) {
+                        // lightboxContainerVideo.style.display = 'none'
+                        indexPhoto = nombrePhotos - 1
+                // cas : passer d'une image à une vidéo précédente en début de liste
+                        if (photosAffichees[indexPhoto].classList.contains('videoAffichee')) {
+                            lightboxContainerVideo.style.display = 'block'
+                            lightboxContainerImg.setAttribute('aria-hidden', 'true')
+                            lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                            lightboxContainerImg.style.display = 'none'
+                            let sourceVideo = arrayRefSrc[indexPhoto]
+                            lightboxContainerVideo.setAttribute('class', 'htmlVideo')
+                            lightboxContainerVideo.setAttribute('controls', '')
+                            lightboxContainerVideoSource.setAttribute('src', sourceVideo)
+                            lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
+                            lightboxContainerVideoSource.setAttribute('alt', arrayTitle[indexPhoto])
+                            lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
+                            lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
+                    // fermeture de la lightbox au clic pour empêcher l'empilement consécutif de vidéos 
+                            croixDeFermeture.addEventListener('click', () => {
+                                LAlightbox.style.display = 'none'
+                                lightboxContainerVideo.style.display = 'none'
+                                lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                            })
+                            titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+            // cas : passer d'une image à une image précente en début de liste
+                        } else {
+                            let sourcePhoto = arrayRefSrc[indexPhoto]
+                            lightboxContainerImg.style.display = 'block'
+                            lightboxContainerVideo.setAttribute('aria-hidden', 'true')
+                            lightboxContainerImg.setAttribute('aria-hidden', 'false')
+
+                            lightboxContainerVideo.style.display = 'none'
+                            lightboxContainerImg.setAttribute('src', sourcePhoto)
+                            lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                            titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                        }
+
+                    } else { 
+                        // cas : passer d'une vidéo à une image 
+                        if (uneSeulePhoto.classList.contains('videoAffichee')) {
+                            lightboxContainerVideo.style.display = 'none'
+                            lightboxContainerImg.style.display = 'block' 
+                            lightboxContainerImg.setAttribute('aria-hidden', 'false')
+                            lightboxContainerVideo.setAttribute('aria-hidden', 'true')
+
+
+                            }
+                        indexPhoto = indexPhoto - 1 
+                        // cas : passer d'une image à une vidéo précédente qqs indice non nul
+                        if (photosAffichees[indexPhoto].classList.contains('videoAffichee')) {
+                            let sourceVideo = arrayRefSrc[indexPhoto]
+                            lightboxContainerImg.style.display = 'none'
+                            lightboxContainerImg.setAttribute('aria-hidden', 'true')
+                            lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                            lightboxContainerVideo.style.display = 'block'
+                            lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                            lightboxContainerVideoSource.setAttribute('src', sourceVideo)
+                            lightboxContainerVideoSource.setAttribute('type', 'video/mp4')                        
+                            lightboxContainerVideo.setAttribute('class', 'htmlVideo')
+                            lightboxContainerVideo.setAttribute('controls', '')
+                            lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
+                            lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
+                    // fermeture de la lightbox au clic pour empêcher l'empilement consécutif de vidéos 
+                            croixDeFermeture.addEventListener('click', () => {
+                                LAlightbox.style.display = 'none'
+                                lightboxContainerVideo.style.display = 'none'
+                                lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                            })
+                            titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                        //cas : passer d'une image à une image précédente qqs indice non nul
+                        } else {
+                            let sourcePhoto = arrayRefSrc[indexPhoto]
+                            lightboxContainerImg.style.display = 'block'
+                            lightboxContainerVideo.style.display = 'none'
+                            lightboxContainerVideo.setAttribute('aria-hidden', 'true')
+                            lightboxContainerImg.setAttribute('aria-hidden', 'false')
+                            lightboxContainerImg.setAttribute('src', sourcePhoto)
+                            lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                            titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                        }
+                    }
+            }
+        })
+    // navigations photos de droite au clic sur la flèche 'suivant'
+        const flecheSuivant = document.querySelector('.lightbox__next')
+        flecheSuivant.addEventListener('click', () => {
+            if (indexPhoto == nombrePhotos - 1) {
+                // cas : passer d'une vidéo à une image suivante                    
+                indexPhoto = 0
+                //cas : passer d'une image à une vidéo suivante en fin de liste
+                if (photosAffichees[indexPhoto].classList.contains('videoAffichee')) {
+                    let sourceVideo = arrayRefSrc[indexPhoto]
+                    lightboxContainerImg.style.display = 'none'
+                    lightboxContainerVideo.style.display = 'block'
+                    lightboxContainerImg.setAttribute('aria-hidden', 'true')
+                    lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                    lightboxContainerVideo.setAttribute('class', 'htmlVideo')
+                    lightboxContainerVideo.setAttribute('controls', '')
+                    lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                    lightboxContainerVideoSource.setAttribute('src', sourceVideo)
+                    lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
+                    lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
+                    lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
+                    titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                    croixDeFermeture.addEventListener('click', () => {
+                        LAlightbox.style.display = 'none'
+                        lightboxContainerVideo.style.display = 'none'
+                        lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                    })
+                } else {
+                    // cas : passer d'une image à une image suivante en fin de liste
+                    let sourcePhoto = arrayRefSrc[indexPhoto]
+                    lightboxContainerImg.style.display = 'block'
+                    lightboxContainerVideo.style.display = 'none'
+                    lightboxContainerImg.setAttribute('aria-hidden', 'false')
+                    lightboxContainerVideo.setAttribute('aria-hidden', 'true')
+                    lightboxContainerImg.setAttribute('src', sourcePhoto)
+                    lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                    titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                }
+            } else {
+                // cas : passer d'une vidéo à une image suivante en toute autre indice de la liste
+                if (uneSeulePhoto.classList.contains('videoAffichee')) {
+                    lightboxContainerVideo.style.display = 'none'
+                    lightboxContainerImg.style.display = 'block'                        
+                    }
+                indexPhoto = indexPhoto + 1
+                //cas : passer d'une image à une vidéo suivante quel que soit indice non final de la liste
+                if (photosAffichees[indexPhoto].classList.contains('videoAffichee')) {
+                    let sourceVideo = arrayRefSrc[indexPhoto]
+                    lightboxContainerImg.style.display = 'none'
+                    lightboxContainerVideo.style.display = 'block'
+                    lightboxContainerImg.setAttribute('aria-hidden', 'true')
+                    lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                    lightboxContainerVideo.setAttribute('class', 'htmlVideo')
+                    lightboxContainerVideo.setAttribute('controls', '')
+                    lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                    lightboxContainerVideoSource.setAttribute('src', sourceVideo)
+                    lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
+                    lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
+                    lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
+                    titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                    croixDeFermeture.addEventListener('click', () => {
+                        LAlightbox.style.display = 'none'
+                        lightboxContainerVideo.style.display = 'none'
+                        lightboxContainerVideo.setAttribute('aria-hidden', 'false')
+                    })
+                //cas : passer d'une image à une image suivante quel que soit indice non final de la liste 
+                } else {
+                    let sourcePhoto = arrayRefSrc[indexPhoto]
+                    lightboxContainerImg.style.display = 'block'
+                    lightboxContainerVideo.style.display = 'none'
+                    lightboxContainerImg.setAttribute('aria-hidden', 'false')
+                    lightboxContainerVideo.setAttribute('aria-hidden', 'true')
+                    lightboxContainerImg.setAttribute('src', sourcePhoto)
+                    lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                    titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
+                }
+            }})
+    // navigations photos de droite en appuyant sur la flèche de droite du clavier
+        LAlightbox.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                console.log('entréeDroite entendue');
                 if (indexPhoto == nombrePhotos - 1) {
                     // cas : passer d'une vidéo à une image suivante                    
                     indexPhoto = 0
@@ -286,10 +830,12 @@ async function lightboxFunction(allMediaOnePhotographer) {
                         lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
                         titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                     }
-                }})
-            })
+                }
+            }
+        })
         }
-    )
+        })
+    })
 }
 
 async function headerFunction(allMediaOnePhotographer, allData) {
@@ -567,3 +1113,9 @@ croixDeFermeture.addEventListener('click', () => {
     document.querySelector('#lightbox').style.display = 'none'
     })
 
+const lightboo = document.querySelector('#lightbox')
+lightboo.addEventListener('keyup', (e) => {
+    if (e.key === 'Escape') {
+        document.querySelector('#lightbox').style.display = 'none'
+    }
+})

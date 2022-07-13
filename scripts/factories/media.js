@@ -15,13 +15,14 @@ function media (dataOneArtwork) {
             image.setAttribute('src', srcImage)
             image.setAttribute('alt', `Photographie intitulée ${title}`)
             image.setAttribute('class', 'photoAffichee');
-            image.setAttribute('tabindex', '1')
+            image.setAttribute('tabindex', '0')
             return image
         } else {
             const encartVideo = document.createElement('div')
             encartVideo.setAttribute('class','divArticleVideo')
             const videoPlayer = document.createElement('video')
             videoPlayer.setAttribute('id','video')
+            videoPlayer.setAttribute('tabindex','0')
             videoPlayer.setAttribute('class', 'videoAffichee');
             // videoPlayer.setAttribute('controls', '')
             const iconePlayVideo = document.createElement('img')
@@ -34,7 +35,7 @@ function media (dataOneArtwork) {
             encartVideo.appendChild(iconePlayVideo)
             encartVideo.appendChild(videoPlayer)
             videoPlayer.appendChild(source)
-            encartVideo.setAttribute('tabindex', '1')
+            // encartVideo.setAttribute('tabindex', '0')
             return encartVideo
         }
     }
