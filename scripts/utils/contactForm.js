@@ -56,16 +56,21 @@ function closeModal() {
 
 }
 
-
-// fermeture de la modale à l'appui sur la touche Echap
+// fermeture de la modale :
+//      à l'appui sur la touche Echap
 modal.addEventListener('keyup', (e) => {
   if (e.key === 'Escape') {
     closeModal()
   }
 })
-
-//  fermeture de la modale au clic sur la croix de fermeture 
+//      au clic sur la croix de fermeture 
 modalCloseBtn.addEventListener('click', closeModal)
+//      en appuyant sur entrée lorsque la sélection au clavier est sur la croix de fermeture
+modalCloseBtn.addEventListener('keyup', (e) => {
+  if (e.key === 'Enter') {
+    closeModal()
+  }
+})
 
 // // // Vérification de la validité du prénom renseigné 
 
