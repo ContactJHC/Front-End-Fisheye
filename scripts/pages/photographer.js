@@ -475,7 +475,16 @@ async function sortsFunction(allMediaOnePhotographer) {
         likesFunction(sortedByLikesAllMediaOnePhotographer, alld)
     })
 
-    // écoute d'événement pour tri par popularité
+    declencheurTriLikes.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') {
+            deleteArticles()
+            displayPhotos(sortedByLikesAllMediaOnePhotographer)
+            lightboxFunction(sortedByLikesAllMediaOnePhotographer)
+            likesFunction(sortedByLikesAllMediaOnePhotographer, alld)
+        }
+    })
+
+    // écoute d'événement pour tri par titre
     const declencheurTriTitre = document.querySelector('#tri-titre')
     sortedByTitlesAllMediaOnePhotographer.sort(function(a, b) {
             if (a.title < b.title) {return -1}
@@ -484,12 +493,22 @@ async function sortsFunction(allMediaOnePhotographer) {
         }
     )
     
-        declencheurTriTitre.addEventListener('click', () => {
+    declencheurTriTitre.addEventListener('click', () => {
         deleteArticles()
         displayPhotos(sortedByTitlesAllMediaOnePhotographer)
         lightboxFunction(sortedByTitlesAllMediaOnePhotographer)
         likesFunction(sortedByTitlesAllMediaOnePhotographer, alld)
     })
+
+    declencheurTriTitre.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') {
+            deleteArticles()
+            displayPhotos(sortedByTitlesAllMediaOnePhotographer)
+            lightboxFunction(sortedByTitlesAllMediaOnePhotographer)
+            likesFunction(sortedByTitlesAllMediaOnePhotographer, alld)
+        }
+    })
+    
 
     // // écoute d'événement pour tri par date - tri par date apparaît sur la maquette mais n'est pas demandé 
     // const declencheurTriDate = document.querySelector('#tri-dates')
@@ -504,10 +523,22 @@ async function sortsFunction(allMediaOnePhotographer) {
     //     likesFunction(sortedByLikesAllMediaOnePhotographer, alld)
     // })
 
-    // affichage des possibilités de tri au clic sur le bouton 'popularité'
+    // affichage des possibilités de tri 
+    //              au clic sur le bouton 'popularité'
     declencheurTriLikes.addEventListener('mouseover', () => {
         declencheurTriTitre.style.display = 'block'
     })
+    //              en appuyant sur entrée au focus en navigation au clavier
+    // declencheurTriLikes.addEventListener('keyup', (e) => {
+    //     if (e.key === 'Enter') {
+    //         declencheurTriTitre.style.display = 'block'
+    //     }
+    // })
+    declencheurTriLikes.addEventListener('focus', () => {
+        declencheurTriTitre.style.display = 'block'
+    })
+
+
 }
 
 let alld =''
