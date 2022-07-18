@@ -26,7 +26,7 @@ function displayModal() {
   modalCloseBtn.focus()
   modalCloseBtn.setAttribute('tabindex','0')
   mainHTML.classList.add('no-scroll')
-
+  mainHTML.style.opacity = '0.6'
  
 }
 
@@ -52,6 +52,7 @@ function closeModal() {
     mainHTML.setAttribute('aria-hidden','false')
     // focus sur le bouton d'ouverture de la modale
     boutonEnvoi.focus()
+    mainHTML.style.opacity = '1'
 
 }
 
