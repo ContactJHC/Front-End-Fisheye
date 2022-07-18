@@ -21,6 +21,7 @@ function displayPhotos(dataAllMediaOneID) {
     const sectionPhotographPhotos = document.querySelector(".photograph-photos")
     // On affiche en HTML toutes les photos et vidéos de l'artiste en parcourant dataAllMediaOneID
     dataAllMediaOneID.forEach((e) => {
+        // eslint-disable-next-line no-undef
         const mediaOneId = media(e)
         const oneArtworksDOM = mediaOneId()        
         sectionPhotographPhotos.appendChild(oneArtworksDOM)
@@ -53,11 +54,10 @@ async function lightboxFunction(allMediaOnePhotographer) {
     let arrayTitle = []
     let refSrc = ''
     let index = 0
-    let title = ''
     // displayPhotos(allMediaOnePhotographer)
     // alt vaut title, pas besoin de le déclarer 
     allMediaOnePhotographer.forEach((dataOneArtwork) => {
-        const { id, photographerId, title, image, video, likes, date, price } = dataOneArtwork
+        const {photographerId, title, image, video} = dataOneArtwork
         // distinction entre image et vidéo        
         if (dataOneArtwork.image) {
             refSrc = `assets/images/${photographerId}/${image}`
@@ -845,10 +845,9 @@ async function headerFunction(allMediaOnePhotographer, allData) {
     let arrayTitle = []
     let refSrc = ''
     let index = 0
-    let title = ''
     // alt vaut title, pas besoin de le déclarer 
     allMediaOnePhotographer.forEach((dataOneArtwork) => {
-        const { id, photographerId, title, image, video, likes, date, price } = dataOneArtwork
+        const {photographerId, title, image, video} = dataOneArtwork
         // distinction entre image et vidéo        
         if (dataOneArtwork.image) {
             refSrc = `assets/images/${photographerId}/${image}`
@@ -864,12 +863,7 @@ async function headerFunction(allMediaOnePhotographer, allData) {
             index ++
         }
     })
-    // const fixedBanner = document.createElement('div')
-    // const likesFixedBanner = document.createElement('div')
-    // const priceFixedBanner = document.createElement('div')
-    // fixedBanner.setAttribute('class','likesAndPriceBanner')
     const photographerData = allData.photographers.filter(e=>e.id==idOnePhotographer)[0]
-    const photographerPrice = photographerData.price
     // Affiche l'entête 
     const photographHeader = document.querySelector('.photograph-header')    
     const photographerNameAndCity = document.createElement('div')
@@ -904,10 +898,9 @@ async function likesFunction(allMediaOnePhotographer, allData) {
     let arrayTitle = []
     let refSrc = ''
     let index = 0
-    let title = ''
     // alt vaut title, pas besoin de le déclarer 
     allMediaOnePhotographer.forEach((dataOneArtwork) => {
-        const { id, photographerId, title, image, video, likes, date, price } = dataOneArtwork
+        const {photographerId, title, image, video} = dataOneArtwork
         // distinction entre image et vidéo        
         if (dataOneArtwork.image) {
             refSrc = `assets/images/${photographerId}/${image}`
@@ -1054,32 +1047,13 @@ async function sortsFunction(allMediaOnePhotographer) {
             likesFunction(sortedByTitlesAllMediaOnePhotographer, alld)
         }
     })
-    
-
-    // // écoute d'événement pour tri par date - tri par date apparaît sur la maquette mais n'est pas demandé 
-    // const declencheurTriDate = document.querySelector('#tri-dates')
-    // sortedByDatesAllMediaOnePhotographer.sort(function(a,b) {
-    //     return b.date < a.date ? 1 : -1 ;
-    // }) 
-    
-    // declencheurTriDate.addEventListener('click', () => {
-    //     deleteArticles()
-    //     displayPhotos(sortedByLikesAllMediaOnePhotographer)
-    //     lightboxFunction(sortedByLikesAllMediaOnePhotographer)
-    //     likesFunction(sortedByLikesAllMediaOnePhotographer, alld)
-    // })
 
     // affichage des possibilités de tri 
     //              au clic sur le bouton 'popularité'
     declencheurTriLikes.addEventListener('mouseover', () => {
         declencheurTriTitre.style.display = 'block'
     })
-    //              en appuyant sur entrée au focus en navigation au clavier
-    // declencheurTriLikes.addEventListener('keyup', (e) => {
-    //     if (e.key === 'Enter') {
-    //         declencheurTriTitre.style.display = 'block'
-    //     }
-    // })
+    
     declencheurTriLikes.addEventListener('focus', () => {
         declencheurTriTitre.style.display = 'block'
     })
@@ -1095,6 +1069,7 @@ async function init() {
     const allm = donnees[1]
     const phoData = alld.photographers.filter(e=>e.id==idOnePhotographer)[0]
     nomDuPhotographe = phoData.name
+    // eslint-disable-next-line no-undef
     constructionHeaderModal(nomDuPhotographe)
     headerFunction(allm,alld)
     displayPhotos(allm)

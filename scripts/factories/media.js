@@ -2,9 +2,10 @@
 //     extraire données unitaires dans un objet
 //     renvoyer le HTML d'une card photo/vidéo
 
+// eslint-disable-next-line no-unused-vars
 function media (dataOneArtwork) {
 
-    const { id, photographerId, title, image, video, likes, date, price } = dataOneArtwork
+    const { photographerId, title, image, video, likes } = dataOneArtwork
     const srcImage = `assets/images/${photographerId}/${image}`
     const srcVideo = `assets/images/${photographerId}/${video}`
 

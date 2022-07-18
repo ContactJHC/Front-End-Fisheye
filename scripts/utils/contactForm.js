@@ -2,9 +2,9 @@ const modal = document.getElementById("contact_modal")
 const mainHTML = document.getElementById('main')
 const modalCloseBtn = document.querySelector('#modalCloseBtn')
 const boutonEnvoi = document.querySelector('#boutonFin')
-const divModale = document.querySelector('#contact_modal')
 const boutonContact = document.querySelector('#boutonContact')
 
+// eslint-disable-next-line no-unused-vars
 function constructionHeaderModal(nomPhotographe) {
   const parentNode = document.querySelector('.modal')
   const formModal = document.querySelector('#formulaire')
@@ -16,8 +16,7 @@ function constructionHeaderModal(nomPhotographe) {
 
 function displayModal() {
   // affichage de la modale
-  console.log('clic effectif sur bouton CONTACTEZ MOI');
-  modal.style.display = "block";
+  modal.style.display = "block"
   // masquage de la page html en terme d'accessibilité lorsque la modale est ouverte
   // affichage de la modale - accessibilité
   mainHTML.setAttribute('aria-hidden', 'true')
@@ -103,7 +102,7 @@ function verifNom() {
   } else {
     spanNom.style.display = "block";
     return false;
-  };
+  }
 }
 
 nom.addEventListener("keyup", verifNom);
@@ -115,6 +114,7 @@ const email = document.querySelector('#email');
 const spanEmail = document.querySelector(".aidesEmail");
 
 function verifEmail() {
+  // eslint-disable-next-line no-useless-escape
   if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value))
     {
       spanEmail.style.display = "none";
@@ -122,7 +122,7 @@ function verifEmail() {
     } else {
       spanEmail.style.display = "block";
       return false;
-    };
+    }
   
   
 }
@@ -150,12 +150,6 @@ message.addEventListener("keyup", verifMessage);
 // Définition de la fonction d'envoi  
 // Récupération des informations du formulaire
 
-const outputData = {
-    'prénom': prenom.value,
-    'nom': nom.value,
-    'email': email.value,
-    'message': message.value,
-}
 
 function validate() {
     
