@@ -258,7 +258,6 @@ main .photograph-header .photographerPicture {
 }
 
 .modal {
-    position: fixed;
     top: 5%;
     width: 30%;
     left: 25%;
@@ -269,6 +268,7 @@ main .photograph-header .photographerPicture {
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    margin-bottom: 15px;
     max-height: calc(100vh - 100px);
     overflow-y: auto;
     
@@ -325,6 +325,8 @@ form input {
 
 form span {
     display: none;
+    color: #901C1C;
+    font-weight: bold;
 }
 
 #boutonFin {

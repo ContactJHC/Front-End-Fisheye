@@ -1050,7 +1050,10 @@ async function sortsFunction(allMediaOnePhotographer) {
 
     // affichage des possibilités de tri 
     //              au clic sur le bouton 'popularité'
-    declencheurTriLikes.addEventListener('mouseover', () => {
+
+    const menuDeroul = document.querySelector('#menu-deroulant')
+
+    menuDeroul.addEventListener('mouseover', () => {
         declencheurTriTitre.style.display = 'block'
     })
     
@@ -1058,6 +1061,15 @@ async function sortsFunction(allMediaOnePhotographer) {
         declencheurTriTitre.style.display = 'block'
     })
 
+    // repli du bandeau déroulant aux actions contraires 
+
+    declencheurTriTitre.addEventListener('blur', () => {
+        declencheurTriTitre.style.display = 'none'
+    })
+
+    menuDeroul.addEventListener('mouseleave', () => {
+        declencheurTriTitre.style.display = 'none'
+    })
 
 }
 
