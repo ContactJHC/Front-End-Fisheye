@@ -268,7 +268,7 @@ main .photograph-header .photographerPicture {
     justify-content: space-between;
     padding: 35px;
     margin: auto;
-    margin-bottom: 15px;
+    margin-top: 15px;
     max-height: calc(100vh - 100px);
     overflow-y: auto;
     

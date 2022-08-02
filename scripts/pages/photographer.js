@@ -105,7 +105,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
             lightboxContainerVideo.setAttribute('controls', '')
             lightboxContainerVideoSource.setAttribute('src', sourceVideo)
             lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
-            lightboxContainerVideoSource.setAttribute('alt', arrayTitle[indexPhoto])
+            lightboxContainerVideoSource.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
             lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
             lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
     // fermeture de la lightbox au clic pour empêcher l'empilement de vidéos consécutives
@@ -121,7 +121,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
             lightboxContainerImg.style.display = 'block'
             let sourcePhoto = uneSeulePhoto.getAttribute('src')
             lightboxContainerImg.setAttribute('src', sourcePhoto)
-            lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+            lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
             lightboxContainerVideo.setAttribute('aria-hidden', 'true')
             lightboxContainerImg.setAttribute('aria-hidden', 'false')
 
@@ -145,7 +145,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                     lightboxContainerVideo.setAttribute('controls', '')
                     lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                     lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
-                    lightboxContainerVideoSource.setAttribute('alt', arrayTitle[indexPhoto])
+                    lightboxContainerVideoSource.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                     lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
                     lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
             // fermeture de la lightbox au clic pour empêcher l'empilement consécutif de vidéos 
@@ -164,7 +164,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
 
                     lightboxContainerVideo.style.display = 'none'
                     lightboxContainerImg.setAttribute('src', sourcePhoto)
-                    lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                    lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                     titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                 }
 
@@ -186,7 +186,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                     lightboxContainerImg.setAttribute('aria-hidden', 'true')
                     lightboxContainerVideo.setAttribute('aria-hidden', 'false')
                     lightboxContainerVideo.style.display = 'block'
-                    lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                    lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                     lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                     lightboxContainerVideoSource.setAttribute('type', 'video/mp4')                        
                     lightboxContainerVideo.setAttribute('class', 'htmlVideo')
@@ -208,7 +208,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                     lightboxContainerVideo.setAttribute('aria-hidden', 'true')
                     lightboxContainerImg.setAttribute('aria-hidden', 'false')
                     lightboxContainerImg.setAttribute('src', sourcePhoto)
-                    lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                    lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                     titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                 }
         }})
@@ -230,7 +230,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                         lightboxContainerVideo.setAttribute('controls', '')
                         lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                         lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
-                        lightboxContainerVideoSource.setAttribute('alt', arrayTitle[indexPhoto])
+                        lightboxContainerVideoSource.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                         lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
                         lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
                 // fermeture de la lightbox au clic pour empêcher l'empilement consécutif de vidéos 
@@ -249,7 +249,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
 
                         lightboxContainerVideo.style.display = 'none'
                         lightboxContainerImg.setAttribute('src', sourcePhoto)
-                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                         titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                     }
 
@@ -271,7 +271,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                         lightboxContainerImg.setAttribute('aria-hidden', 'true')
                         lightboxContainerVideo.setAttribute('aria-hidden', 'false')
                         lightboxContainerVideo.style.display = 'block'
-                        lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                        lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                         lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                         lightboxContainerVideoSource.setAttribute('type', 'video/mp4')                        
                         lightboxContainerVideo.setAttribute('class', 'htmlVideo')
@@ -293,7 +293,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                         lightboxContainerVideo.setAttribute('aria-hidden', 'true')
                         lightboxContainerImg.setAttribute('aria-hidden', 'false')
                         lightboxContainerImg.setAttribute('src', sourcePhoto)
-                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                         titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                     }
                 }
@@ -314,7 +314,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                     lightboxContainerVideo.setAttribute('aria-hidden', 'false')
                     lightboxContainerVideo.setAttribute('class', 'htmlVideo')
                     lightboxContainerVideo.setAttribute('controls', '')
-                    lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                    lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                     lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                     lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
                     lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
@@ -333,7 +333,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                     lightboxContainerImg.setAttribute('aria-hidden', 'false')
                     lightboxContainerVideo.setAttribute('aria-hidden', 'true')
                     lightboxContainerImg.setAttribute('src', sourcePhoto)
-                    lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                    lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                     titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                 }
             } else {
@@ -352,7 +352,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                     lightboxContainerVideo.setAttribute('aria-hidden', 'false')
                     lightboxContainerVideo.setAttribute('class', 'htmlVideo')
                     lightboxContainerVideo.setAttribute('controls', '')
-                    lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                    lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                     lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                     lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
                     lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
@@ -371,7 +371,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                     lightboxContainerImg.setAttribute('aria-hidden', 'false')
                     lightboxContainerVideo.setAttribute('aria-hidden', 'true')
                     lightboxContainerImg.setAttribute('src', sourcePhoto)
-                    lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                    lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                     titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                 }
             }})
@@ -391,7 +391,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                         lightboxContainerVideo.setAttribute('aria-hidden', 'false')
                         lightboxContainerVideo.setAttribute('class', 'htmlVideo')
                         lightboxContainerVideo.setAttribute('controls', '')
-                        lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                        lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                         lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                         lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
                         lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
@@ -410,7 +410,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                         lightboxContainerImg.setAttribute('aria-hidden', 'false')
                         lightboxContainerVideo.setAttribute('aria-hidden', 'true')
                         lightboxContainerImg.setAttribute('src', sourcePhoto)
-                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                         titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                     }
                 } else {
@@ -429,7 +429,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                         lightboxContainerVideo.setAttribute('aria-hidden', 'false')
                         lightboxContainerVideo.setAttribute('class', 'htmlVideo')
                         lightboxContainerVideo.setAttribute('controls', '')
-                        lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                        lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                         lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                         lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
                         lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
@@ -448,7 +448,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                         lightboxContainerImg.setAttribute('aria-hidden', 'false')
                         lightboxContainerVideo.setAttribute('aria-hidden', 'true')
                         lightboxContainerImg.setAttribute('src', sourcePhoto)
-                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                         titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                     }
                 }
@@ -484,7 +484,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                 lightboxContainerVideo.setAttribute('controls', '')
                 lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                 lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
-                lightboxContainerVideoSource.setAttribute('alt', arrayTitle[indexPhoto])
+                lightboxContainerVideoSource.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                 lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
                 lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
         // fermeture de la lightbox au clic pour empêcher l'empilement de vidéos consécutives
@@ -500,7 +500,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                 lightboxContainerImg.style.display = 'block'
                 let sourcePhoto = uneSeulePhoto.getAttribute('src')
                 lightboxContainerImg.setAttribute('src', sourcePhoto)
-                lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                 lightboxContainerVideo.setAttribute('aria-hidden', 'true')
                 lightboxContainerImg.setAttribute('aria-hidden', 'false')
 
@@ -524,7 +524,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                         lightboxContainerVideo.setAttribute('controls', '')
                         lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                         lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
-                        lightboxContainerVideoSource.setAttribute('alt', arrayTitle[indexPhoto])
+                        lightboxContainerVideoSource.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                         lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
                         lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
                 // fermeture de la lightbox au clic pour empêcher l'empilement consécutif de vidéos 
@@ -543,7 +543,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
 
                         lightboxContainerVideo.style.display = 'none'
                         lightboxContainerImg.setAttribute('src', sourcePhoto)
-                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                         titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                     }
 
@@ -565,7 +565,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                         lightboxContainerImg.setAttribute('aria-hidden', 'true')
                         lightboxContainerVideo.setAttribute('aria-hidden', 'false')
                         lightboxContainerVideo.style.display = 'block'
-                        lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                        lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                         lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                         lightboxContainerVideoSource.setAttribute('type', 'video/mp4')                        
                         lightboxContainerVideo.setAttribute('class', 'htmlVideo')
@@ -587,7 +587,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                         lightboxContainerVideo.setAttribute('aria-hidden', 'true')
                         lightboxContainerImg.setAttribute('aria-hidden', 'false')
                         lightboxContainerImg.setAttribute('src', sourcePhoto)
-                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                         titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                     }
             }})
@@ -609,7 +609,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                             lightboxContainerVideo.setAttribute('controls', '')
                             lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                             lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
-                            lightboxContainerVideoSource.setAttribute('alt', arrayTitle[indexPhoto])
+                            lightboxContainerVideoSource.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée' + ', vue rapprochée')
                             lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
                             lightboxContainerVideo.appendChild(lightboxContainerVideoSource)
                     // fermeture de la lightbox au clic pour empêcher l'empilement consécutif de vidéos 
@@ -628,7 +628,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
 
                             lightboxContainerVideo.style.display = 'none'
                             lightboxContainerImg.setAttribute('src', sourcePhoto)
-                            lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                            lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                             titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                         }
 
@@ -650,7 +650,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                             lightboxContainerImg.setAttribute('aria-hidden', 'true')
                             lightboxContainerVideo.setAttribute('aria-hidden', 'false')
                             lightboxContainerVideo.style.display = 'block'
-                            lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                            lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                             lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                             lightboxContainerVideoSource.setAttribute('type', 'video/mp4')                        
                             lightboxContainerVideo.setAttribute('class', 'htmlVideo')
@@ -672,7 +672,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                             lightboxContainerVideo.setAttribute('aria-hidden', 'true')
                             lightboxContainerImg.setAttribute('aria-hidden', 'false')
                             lightboxContainerImg.setAttribute('src', sourcePhoto)
-                            lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                            lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                             titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                         }
                     }
@@ -693,7 +693,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                     lightboxContainerVideo.setAttribute('aria-hidden', 'false')
                     lightboxContainerVideo.setAttribute('class', 'htmlVideo')
                     lightboxContainerVideo.setAttribute('controls', '')
-                    lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                    lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                     lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                     lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
                     lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
@@ -712,7 +712,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                     lightboxContainerImg.setAttribute('aria-hidden', 'false')
                     lightboxContainerVideo.setAttribute('aria-hidden', 'true')
                     lightboxContainerImg.setAttribute('src', sourcePhoto)
-                    lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                    lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                     titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                 }
             } else {
@@ -731,7 +731,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                     lightboxContainerVideo.setAttribute('aria-hidden', 'false')
                     lightboxContainerVideo.setAttribute('class', 'htmlVideo')
                     lightboxContainerVideo.setAttribute('controls', '')
-                    lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                    lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                     lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                     lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
                     lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
@@ -750,7 +750,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                     lightboxContainerImg.setAttribute('aria-hidden', 'false')
                     lightboxContainerVideo.setAttribute('aria-hidden', 'true')
                     lightboxContainerImg.setAttribute('src', sourcePhoto)
-                    lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                    lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                     titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                 }
             }})
@@ -770,7 +770,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                         lightboxContainerVideo.setAttribute('aria-hidden', 'false')
                         lightboxContainerVideo.setAttribute('class', 'htmlVideo')
                         lightboxContainerVideo.setAttribute('controls', '')
-                        lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                        lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                         lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                         lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
                         lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
@@ -789,7 +789,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                         lightboxContainerImg.setAttribute('aria-hidden', 'false')
                         lightboxContainerVideo.setAttribute('aria-hidden', 'true')
                         lightboxContainerImg.setAttribute('src', sourcePhoto)
-                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                         titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                     }
                 } else {
@@ -808,7 +808,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                         lightboxContainerVideo.setAttribute('aria-hidden', 'false')
                         lightboxContainerVideo.setAttribute('class', 'htmlVideo')
                         lightboxContainerVideo.setAttribute('controls', '')
-                        lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto])
+                        lightboxContainerVideo.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                         lightboxContainerVideoSource.setAttribute('src', sourceVideo)
                         lightboxContainerVideoSource.setAttribute('type', 'video/mp4')
                         lightboxContainer.insertBefore(lightboxContainerVideo, titreDeLaPhoto)
@@ -827,7 +827,7 @@ async function lightboxFunction(allMediaOnePhotographer) {
                         lightboxContainerImg.setAttribute('aria-hidden', 'false')
                         lightboxContainerVideo.setAttribute('aria-hidden', 'true')
                         lightboxContainerImg.setAttribute('src', sourcePhoto)
-                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto])
+                        lightboxContainerImg.setAttribute('alt', arrayTitle[indexPhoto] + ', vue rapprochée')
                         titreDeLaPhoto.textContent = arrayTitle[indexPhoto]
                     }
                 }

@@ -10,7 +10,7 @@
   <body>
     <header>
       <a href="./index.html">
-        <img src="assets/images/logo.png" class="logo" alt="logo du site"/>
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye Home Page"/>
       </a>
     </header>
     <main id="main">
@@ -27,11 +27,11 @@
       <div class="photograph-photos">
       </div>
     </main>
-    <div id="contact_modal">
+    <div id="contact_modal" aria-labelledby="headerModal">
 			<div class="modal" role="dialog">
 				<div id="headerModal" >
           <h2>Contactez-moi</h2>
-          <img id="modalCloseBtn" onclick="closeModal()" src="assets/icons/close.svg" alt="croix de fermeture du formulaire" aria-label="fermer"/>
+          <img id="modalCloseBtn" onclick="closeModal()" src="assets/icons/close.svg" alt="croix de fermeture du formulaire" aria-label="fermer le formulaire"/>
         </div>
 				<form id="formulaire" onsubmit= "return false">
 					<div class="formData">
@@ -43,7 +43,7 @@
               name="first"
               minlength="2"
             />
-            <span class="aidesFirst">Au moins 2 caractères et seulement des lettres.</span>
+            <span aria-hidden="true" class="aidesFirst">Au moins 2 caractères et seulement des lettres.</span>
 					</div>
           <div class="formData">
 						<label for="last">Nom</label>
@@ -54,7 +54,7 @@
               name="last"
               minlength="2"
             />
-            <span class="aidesLast">Au moins 2 caractères et seulement des lettres.</span>
+            <span aria-hidden="true" class="aidesLast">Au moins 2 caractères et seulement des lettres.</span>
 					</div>
           <div class="formData">
 						<label for="email">Email</label>
@@ -64,7 +64,7 @@
               id="email"
               name="email"
             />
-            <span class="aidesEmail">Saisir une adresse email valide.</span>
+            <span aria-hidden="true" class="aidesEmail">Saisir une adresse email valide.</span>
 					</div>
           <div class="formData">
 						<label for="messenger">Votre message</label>
@@ -74,7 +74,7 @@
               id="messenger"
               name="messenger"
             />
-            <span class="aidesMessenger">Saisir un message - 500 caractères maximum </span>
+            <span aria-hidden="true" class="aidesMessenger">Saisir un message - 500 caractères maximum </span>
 					</div>
           <button id="boutonFin" class="contact_button">
             Envoyer          
@@ -83,9 +83,9 @@
 			</div>
 		</div>
     <div id="lightbox" aria-hidden="false">      
-      <button class="lightbox__close"></button>
-      <button class="lightbox__prev"></button>
-      <button class="lightbox__next"></button>
+      <button class="lightbox__close" aria-label="Fermer la visualisation"></button>
+      <button class="lightbox__prev" aria-label="Image précédente"></button>
+      <button class="lightbox__next" aria-label="Image suivante"></button>
       <div class="lightbox__container">
         <!-- <video class="htmlVideo" controls>
           <source src="" type="video/mp4" alt="">
